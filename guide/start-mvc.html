@@ -41,17 +41,17 @@
   <!-- RSS -->
   <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
   <!-- Open Graph -->
-  <meta name="description" content="#MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
+  <meta name="description" content="MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MVC 模式">
 <meta property="og:url" content="https://jacklucky.github.io/QeePHPDoc/guide/start-mvc.html">
 <meta property="og:site_name" content="QeePHP文档">
-<meta property="og:description" content="#MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
+<meta property="og:description" content="MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
 <meta property="og:image" content="https://jacklucky.github.io/QeePHPDoc/guide/media/14943853639909.png">
-<meta property="og:updated_time" content="2017-05-10T03:03:34.000Z">
+<meta property="og:updated_time" content="2017-05-10T03:49:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC 模式">
-<meta name="twitter:description" content="#MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
+<meta name="twitter:description" content="MVC 模式QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。 MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。 在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与">
 <meta name="twitter:image" content="https://jacklucky.github.io/QeePHPDoc/guide/media/14943853639909.png">
 <meta name="twitter:site" content="hexojs">
 <meta property="fb:admins" content="100000247608790">
@@ -119,7 +119,7 @@
                 <a href="https://github.com/hexojs/site/edit/master/source/guide/start-mvc.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
               </header>
               <div class="article-content" itemprop="articleBody">
-                <p>#MVC 模式<br>QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。</p>
+                <h1 id="MVC-模式" class="article-heading"><a href="#MVC-模式" class="headerlink" title="MVC 模式"></a>MVC 模式<a class="article-anchor" href="#MVC-模式" aria-hidden="true"></a></h1><p>QeePHP 可以工作在命令行、Web 服务器等各种环境中。在 Web 服务器中，QeePHP 可以选择 MVC 功能组件来实现全功能的应用程序。</p>
 <p>MVC 实际上是一系列略有不同的模式。QeePHP 采用的是Passive（被动）MVC 模式 。</p>
 <p>在 Passive MVC 模式中，Model（模型）完全不知道自己身处于 MVC 结构之中。换句话说，Model 就是一个普通的对象，与 MVC 模式里面的其他组成部分完全没有关联。具体而言，MVC 模式涉及到下列三类对象：</p>
 <ul>
@@ -139,14 +139,14 @@
 <li>可以方便开发人员对应用程序各个部分的代码进行测试。</li>
 </ul>
 <p>QeePHP 应用程序中，MVC 模式的调用流程如下图：<br><img src="media/14943853639909.png" alt=""></p>
-<p>##控制器的角色<br>控制器在 QeePHP 应用中，充当“银行柜台营业员”的角色。所有来自用户（通常是浏览器）的请求在 QeePHP 进行解析后，都交给控制器处理。这和客户到银行办理业务总是到服务窗口前找营业员一样。</p>
+<h2 id="控制器的角色" class="article-heading"><a href="#控制器的角色" class="headerlink" title="控制器的角色"></a>控制器的角色<a class="article-anchor" href="#控制器的角色" aria-hidden="true"></a></h2><p>控制器在 QeePHP 应用中，充当“银行柜台营业员”的角色。所有来自用户（通常是浏览器）的请求在 QeePHP 进行解析后，都交给控制器处理。这和客户到银行办理业务总是到服务窗口前找营业员一样。</p>
 <p>但是，控制器并不完成具体的业务。控制器仅仅是检查用户请求的有效性（输入数据是否合法有效），然后调用模型的业务方法来实际完成业务。这和银行营业员办理业务时通过电脑处理单据一样，营业员仅仅是检查用户提供的资料是否有效。</p>
 <p>控制器调用模型获得处理结果后，将结果存入视图。视图则将结果转换为 HTML 代码，并由 QeePHP 返回给浏览器。浏览器解析获得的 HTML 代码，最终将处理结果显示给用户。</p>
 <p>图“MVC 模式的调用流程”描述了 QeePHP 中 MVC 模式的大概工作流程。流程中可以看出控制器充当的角色，以及需要完成的任务。从某种意义上说，控制器是应用程序暴露给外部的接口。应用程序外部的用户，只有通过访问控制器才能够使用应用程序，而不是直接访问到应用程序的模型等内在部分。</p>
 
               </div>
               <footer class="article-footer">
-                <time class="article-footer-updated" datetime="2017-05-10T03:03:34.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
+                <time class="article-footer-updated" datetime="2017-05-10T03:49:31.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
                 
               </footer>
               
@@ -172,7 +172,7 @@
           <aside id="article-toc" role="navigation">
             <div id="article-toc-inner">
               <strong class="sidebar-title">目录</strong>
-              
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MVC-模式"><span class="toc-text">MVC 模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#控制器的角色"><span class="toc-text">控制器的角色</span></a></li></ol></li></ol>
               <a href="#" id="article-toc-top">回到顶部</a>
             </div>
           </aside>

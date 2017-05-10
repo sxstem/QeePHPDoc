@@ -41,17 +41,17 @@
   <!-- RSS -->
   <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
   <!-- Open Graph -->
-  <meta name="description" content="#MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 ##入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 ind">
+  <meta name="description" content="MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 index.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MVC 模式的启动">
 <meta property="og:url" content="https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-start.html">
 <meta property="og:site_name" content="QeePHP文档">
-<meta property="og:description" content="#MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 ##入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 ind">
+<meta property="og:description" content="MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 index.">
 <meta property="og:image" content="https://jacklucky.github.io/QeePHPDoc/guide/media/14943855015274.png">
-<meta property="og:updated_time" content="2017-05-10T03:38:46.000Z">
+<meta property="og:updated_time" content="2017-05-10T03:49:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC 模式的启动">
-<meta name="twitter:description" content="#MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 ##入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 ind">
+<meta name="twitter:description" content="MVC模式的启动在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。 QeePHP 启动 MVC 模式的主要步骤： 下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。 入口文件首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 index.">
 <meta name="twitter:image" content="https://jacklucky.github.io/QeePHPDoc/guide/media/14943855015274.png">
 <meta name="twitter:site" content="hexojs">
 <meta property="fb:admins" content="100000247608790">
@@ -119,16 +119,16 @@
                 <a href="https://github.com/hexojs/site/edit/master/source/guide/start-mvc-start.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
               </header>
               <div class="article-content" itemprop="articleBody">
-                <p>#MVC模式的启动<br>在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。</p>
+                <h1 id="MVC模式的启动" class="article-heading"><a href="#MVC模式的启动" class="headerlink" title="MVC模式的启动"></a>MVC模式的启动<a class="article-anchor" href="#MVC模式的启动" aria-hidden="true"></a></h1><p>在 QeePHP 应用中，启动 MVC 模式需要经过一系列的操作，了解这个过程可以帮助我们更好的使用 QeePHP。</p>
 <p>QeePHP 启动 MVC 模式的主要步骤：<br><img src="media/14943855015274.png" alt=""></p>
 <p><em>下面根据上图依次说明各个步骤载入的文件，以及文件的用途和主要功能。</em></p>
-<p>##入口文件<br>首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 index.php 的文件，这个文件就是“入口”。</p>
+<h2 id="入口文件" class="article-heading"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件<a class="article-anchor" href="#入口文件" aria-hidden="true"></a></h2><p>首先，所有的请求都会发送到一个特殊的 PHP 脚本文件。这个文件被称为“入口”。新建好的应用程序在 public 目录中有一个名为 index.php 的文件，这个文件就是“入口”。</p>
 <p>“入口”的代码很少：</p>
-<figure class="highlight php"><figcaption><span>入口文件 "/index.php"</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获得应用程序启动信息</span></div><div class="line">$app_config = <span class="keyword">require</span>(dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../config/boot.php'</span>);</div><div class="line"> </div><div class="line"><span class="comment">// 根据启动信息中的设置载入 QeePHP 框架和应用程序对象</span></div><div class="line"><span class="keyword">require</span> $app_config[<span class="string">'QEEPHP_DIR'</span>] . <span class="string">'/library/q.php'</span>;</div><div class="line"><span class="keyword">require</span> $app_config[<span class="string">'APP_DIR'</span>] . <span class="string">'/myapp.php'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// 构造应用程序对象，并启动 MVC 模式</span></div><div class="line"><span class="keyword">echo</span> MyApp::instance($app_config)-&gt;dispatching();</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获得应用程序启动信息</span></div><div class="line">$app_config = <span class="keyword">require</span>(dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/../config/boot.php'</span>);</div><div class="line"> </div><div class="line"><span class="comment">// 根据启动信息中的设置载入 QeePHP 框架和应用程序对象</span></div><div class="line"><span class="keyword">require</span> $app_config[<span class="string">'QEEPHP_DIR'</span>] . <span class="string">'/library/q.php'</span>;</div><div class="line"><span class="keyword">require</span> $app_config[<span class="string">'APP_DIR'</span>] . <span class="string">'/myapp.php'</span>;</div><div class="line"> </div><div class="line"><span class="comment">// 构造应用程序对象，并启动 MVC 模式</span></div><div class="line"><span class="keyword">echo</span> MyApp::instance($app_config)-&gt;dispatching();</div></pre></td></tr></table></figure>
 
               </div>
               <footer class="article-footer">
-                <time class="article-footer-updated" datetime="2017-05-10T03:38:46.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
+                <time class="article-footer-updated" datetime="2017-05-10T03:49:42.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
                 
               </footer>
               
@@ -154,7 +154,7 @@
           <aside id="article-toc" role="navigation">
             <div id="article-toc-inner">
               <strong class="sidebar-title">目录</strong>
-              
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MVC模式的启动"><span class="toc-text">MVC模式的启动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#入口文件"><span class="toc-text">入口文件</span></a></li></ol></li></ol>
               <a href="#" id="article-toc-top">回到顶部</a>
             </div>
           </aside>

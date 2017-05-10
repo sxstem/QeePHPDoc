@@ -2,12 +2,18 @@
 <html lang="zh-cn">
 <head prefix="og: http://ogp.me/ns#">
   <meta charset="utf-8">
-  <title>News | QeePHP文档</title>
+  <title>准备开发环境 | QeePHP文档</title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/archives/2017/04/index.html">
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/index.html">
   <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/index.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/index.html">
+    
   
   <!-- Icon -->
   <link rel="apple-touch-icon" sizes="57x57" href="/QeePHPDoc/icon/apple-touch-icon-57x57.png">
@@ -35,12 +41,16 @@
   <!-- RSS -->
   <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
-<meta property="og:title" content="News">
-<meta property="og:url" content="https://jacklucky.github.io/QeePHPDoc/archives/2017/04/index.html">
+  <meta name="description" content="#准备开发环境本教程假定读者使用 Windows 环境，并且具备 PHP5 和 MySQL 的基本知识。如果要运行本教程的代码，需要有能够正常运行的 Apache2、PHP5 和 MySQL5 环境。对于初学者我们推荐Wamp集成环境包 环境需求 PHP &amp;gt;= 5.5.9 (其实你不必惊讶，PHP 7 的时代了) Apache Rewrite 模块  ##使用Wamp环境包WampServe">
+<meta property="og:type" content="website">
+<meta property="og:title" content="准备开发环境">
+<meta property="og:url" content="https://jacklucky.github.io/QeePHPDoc/guide/index.html">
 <meta property="og:site_name" content="QeePHP文档">
+<meta property="og:description" content="#准备开发环境本教程假定读者使用 Windows 环境，并且具备 PHP5 和 MySQL 的基本知识。如果要运行本教程的代码，需要有能够正常运行的 Apache2、PHP5 和 MySQL5 环境。对于初学者我们推荐Wamp集成环境包 环境需求 PHP &amp;gt;= 5.5.9 (其实你不必惊讶，PHP 7 的时代了) Apache Rewrite 模块  ##使用Wamp环境包WampServe">
+<meta property="og:updated_time" content="2017-05-09T15:54:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="News">
+<meta name="twitter:title" content="准备开发环境">
+<meta name="twitter:description" content="#准备开发环境本教程假定读者使用 Windows 环境，并且具备 PHP5 和 MySQL 的基本知识。如果要运行本教程的代码，需要有能够正常运行的 Apache2、PHP5 和 MySQL5 环境。对于初学者我们推荐Wamp集成环境包 环境需求 PHP &amp;gt;= 5.5.9 (其实你不必惊讶，PHP 7 的时代了) Apache Rewrite 模块  ##使用Wamp环境包WampServe">
 <meta name="twitter:site" content="hexojs">
 <meta property="fb:admins" content="100000247608790">
   <!-- Google Analytics -->
@@ -95,42 +105,69 @@
   </div>
 </header>
 
-    
-<div id="content-wrap">
-  <div class="wrapper">
-    <div class="inner">
-      
-        
-          <article class="article post" itemscope itemtype="http://schema.org/Article">
-  <header class="article-header">
-    
-      <h1>
-        <a href="/QeePHPDoc/2017/04/28/prepare/" class="article-title" itemprop="name">prepare</a>
-      </h1>
-    
-    <a href="/QeePHPDoc/2017/04/28/prepare/" class="article-date"><time datetime="2017-04-27T23:42:27.000Z">2017-04-27</time></a>
-  </header>
-  <div class="article-content" itemprop="articleBody">
-    <p>#这是一个标题</p>
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">准备开发环境</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/index.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <p>#准备开发环境<br>本教程假定读者使用 Windows 环境，并且具备 PHP5 和 MySQL 的基本知识。如果要运行本教程的代码，需要有能够正常运行的 Apache2、PHP5 和 MySQL5 环境。对于初学者我们推荐<a href="http://www.wampserver.com/en/" target="_blank" rel="external">Wamp</a>集成环境包</p>
+<h2 id="环境需求" class="article-heading"><a href="#环境需求" class="headerlink" title="环境需求"></a>环境需求<a class="article-anchor" href="#环境需求" aria-hidden="true"></a></h2><ul>
+<li>PHP &gt;= 5.5.9 (其实你不必惊讶，PHP 7 的时代了)</li>
+<li>Apache Rewrite 模块</li>
+</ul>
+<p>##使用Wamp环境包<br>WampServer 　Wamp就是Windows Apache Mysql PHP集成安装环境，即在window下的apache、php和mysql的服务器软件。PHP扩展、Apache模块，开启/关闭鼠标点点就搞定，再也不用亲自去修改配置文件了，WAMP它会去做。再也不用到处询问php的安装问题了，<a href="http://www.wampserver.com/en/" target="_blank" rel="external">Wamp</a>一切都搞定了，这个软件在win平台上使用的较多。</p>
+<p>下载Wamp软件后双击安装，可以选择安装任意目录，这里我们选择安装在D盘，安装D:/wamp64/www这个目录就是我们的根目录。</p>
+<p>##安装QeePHP<br>从<a href="https://github.com/jackLucky/qeephp&gt;" target="_blank" rel="external">https://github.com/jackLucky/qeephp&gt;</a> 下载最新版本的 QeePHP 框架源代码，解压缩放置到可以通过浏览器访问的目录中即可。</p>
+<p>例如 <a href="http://localhost/" target="_blank" rel="external">http://localhost/</a> 对应 d:/wamp64/www 目录，那么将 QeePHP 放置在 d:/wamp64/www/qeephp 目录中就可以通过 <a href="http://localhost/qeephp/" target="_blank" rel="external">http://localhost/qeephp/</a> 访问到 QeePHP 的文件。</p>
 
-  </div>
-  
-</article>
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-09T15:54:21.000Z" itemprop="dateModified">上次更新：2017-05-09</time>
+                
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/index.html';
+  var disqus_title = "准备开发环境";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
 
-        
-      
-        
-          <article class="article post archive-post" itemscope itemtype="http://schema.org/Article">
-            <a class="archive-post-link" href="/QeePHPDoc/2017/04/27/hello-world/">
-              <strong class="archive-post-title" itemprop="name">Hello World!!!!</strong>
-              <span class="archive-post-date"><time datetime="2017-04-27T15:59:14.000Z">2017-04-27</time></span>
-            </a>
-          </article>
-        
-      
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境需求"><span class="toc-text">环境需求</span></a></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"></div>
+</aside>
     </div>
   </div>
 </div>
+
     <footer id="footer" class="wrapper">
   <div class="inner">
     <div id="footer-copyright">
@@ -155,6 +192,8 @@
         <a href="https://github.com/hexojs/hexo" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
       </li>
     </ul>
+    
+      
     
   </div>
   <div id="mobile-lang-select-wrap">

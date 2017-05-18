@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>实现用户注册（功能实现） | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/users-register-code.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/users-register-code.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/users-register-code.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">实现用户注册（功能实现）</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/users-register-code.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="实现用户注册（功能实现）" class="article-heading"><a href="#实现用户注册（功能实现）" class="headerlink" title="实现用户注册（功能实现）"></a>实现用户注册（功能实现）<a class="article-anchor" href="#实现用户注册（功能实现）" aria-hidden="true"></a></h1><p>在前面的小结中，我们主要学习了怎么使用视图。现在我们来解决表单提交，以及模型的创建问题。</p>
+<h2 id="丑陋的表单提交处理代码" class="article-heading"><a href="#丑陋的表单提交处理代码" class="headerlink" title="丑陋的表单提交处理代码"></a>丑陋的表单提交处理代码<a class="article-anchor" href="#丑陋的表单提交处理代码" aria-hidden="true"></a></h2><p>修改 controller/users.php 文件，加入以下代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">actionRegister</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 从 POST 中提取用户名和密码</span></div><div class="line">    $username = trim(strtolower(<span class="keyword">isset</span>($_POST[<span class="string">'username'</span>]) ? $_POST[<span class="string">'username'</span>] : <span class="string">''</span>));</div><div class="line">    $password = <span class="keyword">isset</span>($_POST[<span class="string">'password'</span>]) ? $_POST[<span class="string">'password'</span>] : <span class="string">''</span>;</div><div class="line"> </div><div class="line">    <span class="comment">// 对输入数据进行验证</span></div><div class="line">    $errors = <span class="keyword">array</span>();</div><div class="line">    <span class="keyword">if</span> (strlen($username) &lt; <span class="number">5</span>)</div><div class="line">    &#123;</div><div class="line">        $errors[<span class="string">'username'</span>][] = <span class="string">'用户名不能少于 5 个字符'</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (strlen($username) &gt; <span class="number">15</span>)</div><div class="line">    &#123;</div><div class="line">        $errors[<span class="string">'username'</span>][] = <span class="string">'用户名不能超过 15 个字符'</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> (strlen($password) &lt; <span class="number">6</span>)</div><div class="line">    &#123;</div><div class="line">        $errors[<span class="string">'password'</span>][] = <span class="string">'密码不能少于 6 个字符'</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    ..... 更多的验证代码</div><div class="line"> </div><div class="line">    ..... 检查用户名是否重复</div><div class="line">    ..... 检查保存是否成功</div><div class="line">    ..... 如果失败，将错误信息存入视图</div><div class="line">    ..... 如果失败，将 POST 信息存入视图，以便在表单中重新显示提交的内容</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码可能和过去的做法类似，但是这些代码看着不恶心吗？</p>
+<p>QeePHP 为表单提供了全面支持，并且允许开发者将表单和模型结合起来使用。这样一来，表单数据的过滤、验证，以及错误处理都可以自动完成，不需要开发者手工编码实现。关于如何使用表单，有专门的章节详细阐述。这里我们只简单的展示一下使用 QeePHP 表单模型带来的优势。</p>
+<h2 id="完善模型定义" class="article-heading"><a href="#完善模型定义" class="headerlink" title="完善模型定义"></a>完善模型定义<a class="article-anchor" href="#完善模型定义" aria-hidden="true"></a></h2><p>时刻记住一点，QeePHP 是一个遵循“领域驱动开发”思想的框架。而领域驱动中，最重要的就是模型。而我们的大多数表单都是和模型有关的，所以在处理表单之前，首先要完善模型的定义。因为这些定义可以直接套入表单对象中，避免我们在不同的地方编写同样的逻辑，这就是 DRY 原则的最佳实践。</p>
+<p>先前创建的 User 模型只是半成品，现在我们需要对其进行完善。一个模型由几个方面组成：</p>
+<ul>
+<li>属性：定义模型有哪些属性、属性的类型以及属性的行为和验证规则等</li>
+<li>行为：添加实现业务逻辑需要的方法，让模型逐步逼近实际的需求</li>
+<li>数据：由属性和存储模型属性的数据表组成，但属性不一定要和数据表一一对应</li>
+<li>关系：模型需要互相配合来实现业务需求，因此关系也是模型的一部分</li>
+</ul>
+<h2 id="完善模型的属性" class="article-heading"><a href="#完善模型的属性" class="headerlink" title="完善模型的属性"></a>完善模型的属性<a class="article-anchor" href="#完善模型的属性" aria-hidden="true"></a></h2><p>打开模型的定义文件，在 __define() 方法中可以找到模型的详细定义。这些定义分为几个部分：</p>
+<ul>
+<li>指定存储模型使用的数据表</li>
+<li>属性和关联的定义，例如只读属性、虚拟属性、关联等</li>
+<li>对属性的验证规则</li>
+<li>安全性方面的定义</li>
+<li>行为插件的定义</li>
+</ul>
+<p>在 QeePHP 的模型中，属性本身具有多种特性：</p>
+<ul>
+<li>是否是只读属性</li>
+<li>是否是虚拟属性</li>
+<li>是否有 getter 或 setter 方法</li>
+<li>类型</li>
+<li>验证规则</li>
+</ul>
+<p><code>对于 todo 这样的简单应用，我们用不到这么多高级特性，所以上述内容了解一下就行了。</code></p>
+<p>todo 应用中，user 模型只有两个主要属性：用户名和密码。根据需求，这两个属性有下列要求：</p>
+<ul>
+<li>用户名应该是唯一的</li>
+<li>用户一旦成功创建，就不能更改用户名，因此用户名必须是只读属性</li>
+<li>用户名不能少于 5 个字符，不能多于 15 个字符，并且只能使用字母和数字组成</li>
+<li>密码不能少于 6 个字符，不能多于 20 个字符</li>
+<li>密码应该加密存储</li>
+</ul>
+<p>现在我们一步步来实现这些要求。</p>
+<p>修改 __define() 方法，禁止更新用户名：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="string">'props'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">    .....</div><div class="line">    <span class="comment">// 指定 username 属性为只读</span></div><div class="line">    <span class="string">'username'</span> =&gt; <span class="keyword">array</span>(<span class="string">'readonly'</span> =&gt; <span class="keyword">true</span>),</div><div class="line">    .....</div><div class="line">),</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * 指定更新数据库中的对象时，哪些属性的值不允许由外部提供</div><div class="line"> */</div><div class="line"><span class="string">'update_reject'</span> =&gt; <span class="string">'username'</span>,</div></pre></td></tr></table></figure>
+<p>继续：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="string">'validations'</span> =&gt; <span class="keyword">array</span></div><div class="line">(</div><div class="line">    <span class="comment">// 指定 username 属性的验证规则</span></div><div class="line">    <span class="string">'username'</span> =&gt; <span class="keyword">array</span></div><div class="line">    (</div><div class="line">        <span class="keyword">array</span>(<span class="string">'not_empty'</span>, <span class="string">'用户名不能为空'</span>),</div><div class="line">        <span class="keyword">array</span>(<span class="string">'min_length'</span>, <span class="number">5</span>, <span class="string">'用户名不能少于 5 个字符'</span>),</div><div class="line">        <span class="keyword">array</span>(<span class="string">'max_length'</span>, <span class="number">15</span>, <span class="string">'用户名不能超过 15 个字符'</span>),</div><div class="line">        <span class="keyword">array</span>(<span class="string">'is_alnum'</span>, <span class="string">'用户名只能由字母和数字组成'</span>),</div><div class="line">    ),</div><div class="line"> </div><div class="line">    <span class="comment">// 指定 password 属性的验证规则</span></div><div class="line">    <span class="string">'password'</span> =&gt; <span class="keyword">array</span></div><div class="line">    (</div><div class="line">        <span class="keyword">array</span>(<span class="string">'not_empty'</span>, <span class="string">'密码不能为空'</span>),</div><div class="line">        <span class="keyword">array</span>(<span class="string">'min_length'</span>, <span class="number">6</span>, <span class="string">'密码不能少于 6 个字符'</span>),</div><div class="line">        <span class="keyword">array</span>(<span class="string">'max_length'</span>, <span class="number">20</span>, <span class="string">'密码不能超过 20 个字符'</span>),</div><div class="line">    ),</div><div class="line">),</div></pre></td></tr></table></figure>
+<p>经过简单的设置，大部分要求都可以由 QeePHP 来处理了，剩下的密码加密存储则可以借助现成的 acluser 行为插件来实现。</p>
+<h2 id="行为插件" class="article-heading"><a href="#行为插件" class="headerlink" title="行为插件"></a>行为插件<a class="article-anchor" href="#行为插件" aria-hidden="true"></a></h2><p>虽然我们可以通过给 password 属性添加 getter 和 setter 方法来实现密码的加密，但 QeePHP 已经提供了现成的插件来帮助我们完成类似工作，并且提供了更丰富的特性。</p>
+<p>acluser 行为插件应用到一个模型后，可以实现下列特征：</p>
+<ul>
+<li>密码属性的自动加密</li>
+<li>验证用户名和密码的正确性</li>
+<li>验证用户名的唯一性</li>
+<li>查询用户的基本属性和角色信息</li>
+</ul>
+<p>要使用 acluser 插件，只需要修改 __define() 方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 指定该 ActiveRecord 要使用的行为插件</span></div><div class="line"><span class="string">'behaviors'</span> =&gt; <span class="string">'acluser'</span>,</div><div class="line"> </div><div class="line"><span class="comment">// 指定行为插件的配置</span></div><div class="line"><span class="string">'behaviors_settings'</span> =&gt; <span class="keyword">array</span></div><div class="line">(</div><div class="line">    <span class="comment"># '插件名' =&gt; array('选项' =&gt; 设置),</span></div><div class="line">    <span class="string">'acluser'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">        <span class="string">'acl_data_props'</span> =&gt; <span class="string">'username'</span>,</div><div class="line">    ),</div><div class="line">),</div></pre></td></tr></table></figure>
+<p>acluser 插件的详细文档请参考后续文档<br>指定好 acluser 插件后，我们的 user 模型在属性方面就完善了。</p>
+<h2 id="完善模型的行为和关系" class="article-heading"><a href="#完善模型的行为和关系" class="headerlink" title="完善模型的行为和关系"></a>完善模型的行为和关系<a class="article-anchor" href="#完善模型的行为和关系" aria-hidden="true"></a></h2><p>根据前面的需求分析，user 模型具有下列行为：</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validateLogin</td>
+<td>验证用户名和密码</td>
+</tr>
+<tr>
+<td>createTask</td>
+<td>创建属于该用户的任务</td>
+</tr>
+<tr>
+<td>loadTasks</td>
+<td>载入属于该用户的任务</td>
+</tr>
+</tbody>
+</table>
+<p>由于 acluser 插件已经提供了验证用户名和密码的方法，validateLogin() 方法不需要我们自己实现了。下面来实现 createTask() 和 loadTasks() 方法。</p>
+<p>修改 user 模型的类，加入下列代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">QDB_ActiveRecord_Abstract</span></span></div><div class="line">&#123;</div><div class="line"> </div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 创建属于当前用户的任务</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> Task</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createTask</span><span class="params">($subject, $description = null)</span></span></div><div class="line">    &#123;</div><div class="line">        $task = <span class="keyword">new</span> Task();</div><div class="line">        $task-&gt;owner       = <span class="keyword">$this</span>;</div><div class="line">        $task-&gt;subject     = $subject;</div><div class="line">        $task-&gt;description = $description;</div><div class="line">        <span class="keyword">return</span> $task;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    .....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而 loadTasks() 方法也不需要我们去实现，因为 QeePHP 的 ORM 可以让我们直接通过属性访问一个模型关联的其他模型。所以我们只需要修改 __define() 方法，加入 user 模型和 task 模型的关联就可以了：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">'props'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">    .....</div><div class="line">    <span class="string">'tasks'</span> =&gt; <span class="keyword">array</span>(QDB::HAS_MANY =&gt; <span class="string">'Task'</span>, <span class="string">'target_key'</span> =&gt; <span class="string">'user_id'</span>),</div><div class="line">    .....</div><div class="line">),</div></pre></td></tr></table></figure>
+<p>OK，现在用户模型已经准备好了。</p>
+<h2 id="准备表单视图" class="article-heading"><a href="#准备表单视图" class="headerlink" title="准备表单视图"></a>准备表单视图<a class="article-anchor" href="#准备表单视图" aria-hidden="true"></a></h2><p>QeePHP中有表单控件模块，但是使用起来有些繁琐不够灵活，后续会介绍他的使用方法，所以我们直接使用HTML写表单视图。在<br>app/view/users/register.php 文件的内容为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_extends(<span class="string">'_layouts/default_layout'</span>); <span class="meta">?&gt;</span></span></div><div class="line"></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_block(<span class="string">'contents'</span>); <span class="meta">?&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"form_user"</span> <span class="attr">id</span>=<span class="string">"form_user"</span> <span class="attr">action</span>=<span class="string">"&lt;?php echo url('users/register'); ?&gt;"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>注册新用户<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">id</span>=<span class="string">"username"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="keyword">isset</span>($form_error[<span class="string">'username'</span>]) ? array_shift($form_error[<span class="string">'username'</span>]) : <span class="string">''</span>;<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"password"</span>&gt;</span>密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"password"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="keyword">isset</span>($form_error[<span class="string">'password'</span>]) ? array_shift($form_error[<span class="string">'password'</span>]) : <span class="string">''</span>;<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">label</span>&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"Submit"</span> <span class="attr">value</span>=<span class="string">"注 册"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_endblock(); <span class="meta">?&gt;</span></span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>记得在 todo/public/css/style.css 文件中加入表单样式</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*Add style*/</span></div><div class="line"><span class="selector-tag">form</span> <span class="selector-tag">p</span> <span class="selector-tag">label</span>&#123;<span class="attribute">display</span>:inline-block; <span class="attribute">width</span>: <span class="number">80px</span>; <span class="attribute">text-align</span>:right; <span class="attribute">vertical-align</span>: top;&#125;</div><div class="line"><span class="selector-tag">form</span> <span class="selector-tag">p</span> <span class="selector-tag">span</span><span class="selector-class">.error</span>&#123; <span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现用户登录" class="article-heading"><a href="#实现用户登录" class="headerlink" title="实现用户登录"></a>实现用户登录<a class="article-anchor" href="#实现用户登录" aria-hidden="true"></a></h2><p>修改 users 控制器的 actionRegister() 方法为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">$form_error = <span class="keyword">array</span>();</div><div class="line">   </div><div class="line"><span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_context-&gt;isPOST() &amp;&amp; <span class="keyword">empty</span>($form_error = User::meta()-&gt;validate($_POST)) )</div><div class="line">   &#123;</div><div class="line">       <span class="comment">// 是 POST 提交，并且表单验证通过（借助User模型验证规则对表单数据进行验证，但这不是必须的，具体情况具体分析）</span></div><div class="line">       <span class="keyword">try</span></div><div class="line">       &#123;</div><div class="line">           <span class="comment">// 创建 user 对象、通过构造函数批量对模型赋值，并保存</span></div><div class="line">           $user = <span class="keyword">new</span> User(<span class="keyword">$this</span>-&gt;_context-&gt;post());</div><div class="line">           $user-&gt;save();</div><div class="line">     </div><div class="line">           <span class="comment">// 成功后输出新建用户对象的信息</span></div><div class="line">           dump($user-&gt;username, <span class="string">'新建用户的用户名'</span>);</div><div class="line">           dump($user-&gt;password, <span class="string">'新建用户的密码'</span>);</div><div class="line">           dump($user-&gt;id(), <span class="string">'新建用户的ID'</span>);</div><div class="line">           <span class="keyword">exit</span>;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">catch</span> (AclUser_DuplicateUsernameException $ex)</div><div class="line">       &#123;</div><div class="line">           <span class="comment">// 捕获 AclUser_DuplicateUsernameException 异常，在表单中指出用户名存在重复问题</span></div><div class="line">           $form_error[<span class="string">'username'</span>][] = <span class="string">"您要注册用户名 &#123;$user-&gt;username&#125; 已经存在了"</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">// 将表单对象传递给视图</span></div><div class="line">   <span class="keyword">$this</span>-&gt;_view[<span class="string">'form_error'</span>] = $form_error;</div></pre></td></tr></table></figure>
+<p>现在用浏览器访问 <a href="http://localhost/todo/public/index.php?controller=users&amp;action=register" target="_blank" rel="external">http://localhost/todo/public/index.php?controller=users&amp;action=register</a> ，然后不输入任何内容就点击“提交”按钮，将可以看到如下界面：</p>
+<p><img src="media/14944943001330.jpg" alt=""></p>
+<p>现在输入用户名为：jacklucky，密码为 123456，提交后会看到如下内容：</p>
+<p><img src="media/14944946038391.jpg" alt=""></p>
+<p>通过 phpMyAdmin 可以看到刚刚输入的信息已经存入数据库了：</p>
+<p><img src="media/14944404216518.png" alt=""></p>
+<p>为了方便后续开发，我们再修改一下 users 控制器的 actionRegister() 方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 成功后输出新建用户对象的信息</span></div><div class="line">dump($user-&gt;username, <span class="string">'新建用户的用户名'</span>);</div><div class="line">dump($user-&gt;password, <span class="string">'新建用户的密码'</span>);</div><div class="line">dump($user-&gt;id(), <span class="string">'新建用户的ID'</span>);</div><div class="line"><span class="keyword">exit</span>;</div></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 登录成功后，重定向浏览器</span></div><div class="line"><span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_redirect(url(<span class="string">'default/index'</span>));</div></pre></td></tr></table></figure>
+<p>现在读者朋友们可以发挥自己的想象力，尝试输入不同的内容来测试表单的验证规则、过滤器设置，以及对重复用户名的检查 :)</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-14T12:53:08.000Z" itemprop="dateModified">上次更新：2017-05-14</time>
+                <a href="users-register-ui.html" class="article-footer-prev" title="注册（界面）"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="users-login.html" class="article-footer-next" title="登录和注销"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/users-register-code.html';
+  var disqus_title = "实现用户注册（功能实现）";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#实现用户注册（功能实现）"><span class="toc-text">实现用户注册（功能实现）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#丑陋的表单提交处理代码"><span class="toc-text">丑陋的表单提交处理代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完善模型定义"><span class="toc-text">完善模型定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完善模型的属性"><span class="toc-text">完善模型的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行为插件"><span class="toc-text">行为插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完善模型的行为和关系"><span class="toc-text">完善模型的行为和关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#准备表单视图"><span class="toc-text">准备表单视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现用户登录"><span class="toc-text">实现用户登录</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link current">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link current">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

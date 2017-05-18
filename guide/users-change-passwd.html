@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>实现用户注册（功能实现） | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/users-change-passwd.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/users-change-passwd.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/users-change-passwd.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">实现用户注册（功能实现）</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/users-change-passwd.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="修改密码" class="article-heading"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码<a class="article-anchor" href="#修改密码" aria-hidden="true"></a></h1><p>通常，用户登录后修改自己的密码时都要求输入正在使用的密码。</p>
+<h2 id="添加控制器动作" class="article-heading"><a href="#添加控制器动作" class="headerlink" title="添加控制器动作"></a>添加控制器动作<a class="article-anchor" href="#添加控制器动作" aria-hidden="true"></a></h2><p>修改 users 控制器，加入下列代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">actionChangePasswd</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $form = <span class="keyword">new</span> Form_ChangePasswd();</div><div class="line">     </div><div class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_context-&gt;isPOST() &amp;&amp; $form-&gt;validate($_POST))</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 取得当前用户的信息</span></div><div class="line">            $current_user = <span class="keyword">$this</span>-&gt;_app-&gt;currentUser();</div><div class="line">            <span class="comment">// 修改密码</span></div><div class="line">            User::meta()-&gt;changePassword(</div><div class="line">                $current_user[<span class="string">'username'</span>],</div><div class="line">                $form[<span class="string">'new_password'</span>]-&gt;value,</div><div class="line">                $form[<span class="string">'old_password'</span>]-&gt;value</div><div class="line">                );</div><div class="line">            <span class="comment">// 重定向浏览器</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_redirectMessage(</div><div class="line">                <span class="string">'修改密码成功'</span>,</div><div class="line">                <span class="string">'您的登录密码已经成功修改，下次登录请使用新密码。'</span>,</div><div class="line">                url(<span class="string">'default/index'</span>));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (AclUser_WrongPasswordException $ex)</div><div class="line">        &#123;</div><div class="line">            $form[<span class="string">'old_password'</span>]-&gt;invalidate(<span class="string">'您输入的现用密码不正确'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">$this</span>-&gt;_view[<span class="string">'form'</span>] = $form;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现修改密码表单" class="article-heading"><a href="#实现修改密码表单" class="headerlink" title="实现修改密码表单"></a>实现修改密码表单<a class="article-anchor" href="#实现修改密码表单" aria-hidden="true"></a></h2><p>在 Web 应用中，表单需要完成下面的主要任务：</p>
+<ul>
+<li>容纳从客户端提交的数据</li>
+<li>对客户端提交的数据进行过滤</li>
+<li>对客户端提交的数据进行验证</li>
+<li>导出过滤和验证后的数据</li>
+<li>构造出在浏览器中需要的 HTML 代码</li>
+</ul>
+<p>为了提供更好的灵活性，并且简化表单的使用，QeePHP 将上述几项任务分为多个不同的部分：</p>
+<ul>
+<li>QForm 负责构造表单元素容器</li>
+<li>表单元素负责容纳数据，并数据进行过滤和验证</li>
+<li>通过 QeePHP 的用户界面控件构造表单 HTML 代码</li>
+</ul>
+<p>在 QeePHP 应用中使用表单，典型的过程如下：</p>
+<ol>
+<li>创建表单，定义表单需要容纳的数据，以及过滤和验证规则</li>
+<li>在控制器动作中构造表单对象，并导入数据进行过滤和验证</li>
+<li>在视图中构造表单的 HTML 代码，或者通过视图片段构造表单 HTML 代码</li>
+</ol>
+<p>搞清楚了基本概念，我们就来一步步实现用户注册表单。</p>
+<h2 id="创建表单对象" class="article-heading"><a href="#创建表单对象" class="headerlink" title="创建表单对象"></a>创建表单对象<a class="article-anchor" href="#创建表单对象" aria-hidden="true"></a></h2><p>新建文件 app/form/changepasswd.php，内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Form_ChangePasswd</span> <span class="keyword">extends</span> <span class="title">QForm</span></span></div><div class="line">&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 调用父类的构造函数</span></div><div class="line">        <span class="keyword">parent</span>::__construct(<span class="string">'form_changepasswd'</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 从配置文件载入表单</span></div><div class="line">        <span class="comment">//$filename = rtrim(dirname(__FILE__), '/\\') . DS . 'changepasswd_form.yaml';</span></div><div class="line">        <span class="comment">//$this-&gt;loadFromConfig(Helper_YAML::loadCached($filename));</span></div><div class="line">        </div><div class="line">        <span class="comment">//也可以直接定义配置数组</span></div><div class="line">        $fields = <span class="keyword">array</span>(<span class="string">'old_password'</span>=&gt; <span class="keyword">array</span>(),<span class="string">'new_password'</span> =&gt; <span class="keyword">array</span>(), <span class="string">'new_password2'</span> =&gt; <span class="keyword">array</span>());</div><div class="line">        <span class="keyword">$this</span>-&gt;loadFromConfig($fields);</div><div class="line">      </div><div class="line">        <span class="comment">// 三个密码字段按照 User 模型的 password 属性来验证</span></div><div class="line">        <span class="keyword">$this</span>[<span class="string">'old_password'</span>]-&gt;addValidations(User::meta(), <span class="string">'password'</span>);</div><div class="line">        <span class="keyword">$this</span>[<span class="string">'new_password'</span>]-&gt;addValidations(User::meta(), <span class="string">'password'</span>);</div><div class="line">        <span class="comment">// 但 new_password2 字段还有一个额外的验证规则，</span></div><div class="line">        <span class="comment">// 通过 Form_ChangePasswd 对象的 checkNewPassword() 方法进行验证</span></div><div class="line">        <span class="keyword">$this</span>[<span class="string">'new_password2'</span>]-&gt;addValidations(User::meta(), <span class="string">'password'</span>)</div><div class="line">        -&gt;addValidations(<span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'checkNewPassword'</span>), <span class="string">'两次输入的密码必须一致'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 检查两次输入的新密码是否一致</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkNewPassword</span><span class="params">($new_password)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">$this</span>[<span class="string">'new_password2'</span>]-&gt;value == <span class="keyword">$this</span>[<span class="string">'new_password'</span>]-&gt;value);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>三个密码输入字段使用了User 模型的password属性的验证规则， <code>addValidations(User::meta(), &#39;password&#39;)</code>方法的 <code>User::meta()</code>返回的是User模型的一些源信息，其中就包括User模型的字段和字段的验证规则，第二个参数指定按 User模型的passowrd 属性验证规则来验证，还特别增加一个额外的验证规则。checkNewPassword() 这个方法被用于对 new_password2 字段的验证。这样可以检查两次输入的新密码是否一致。</p>
+<p>对于复杂表单的自定义验证规则，都可以采用上述方式实现。</p>
+<p>船舰修改密码表单的配置文件 app/form/changepasswd_form.yaml：</p>
+<h2 id="添加控制器动作-1" class="article-heading"><a href="#添加控制器动作-1" class="headerlink" title="添加控制器动作"></a>添加控制器动作<a class="article-anchor" href="#添加控制器动作-1" aria-hidden="true"></a></h2><p>修改 users 控制器，加入下列代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">actionChangePasswd</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    $form = <span class="keyword">new</span> Form_ChangePasswd();</div><div class="line">     </div><div class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_context-&gt;isPOST() &amp;&amp; $form-&gt;validate($_POST))</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 取得当前用户的信息（来自session）</span></div><div class="line">            $current_user = <span class="keyword">$this</span>-&gt;_app-&gt;currentUser();</div><div class="line">            <span class="comment">// 修改密码</span></div><div class="line">            User::meta()-&gt;changePassword(</div><div class="line">                $current_user[<span class="string">'username'</span>],</div><div class="line">                $form[<span class="string">'new_password'</span>]-&gt;value,</div><div class="line">                $form[<span class="string">'old_password'</span>]-&gt;value</div><div class="line">                );</div><div class="line">            <span class="comment">// 重定向浏览器</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_redirectMessage(</div><div class="line">                <span class="string">'修改密码成功'</span>,</div><div class="line">                <span class="string">'您的登录密码已经成功修改，下次登录请使用新密码。'</span>,</div><div class="line">                url(<span class="string">'default/index'</span>));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (AclUser_WrongPasswordException $ex)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">//手动设置old_password验证不通过，并且指定错误提示</span></div><div class="line">            $form[<span class="string">'old_password'</span>]-&gt;invalidate(<span class="string">'您输入的现用密码不正确'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">$this</span>-&gt;_view[<span class="string">'form'</span>] = $form;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>actionChangePasswd() 中，我们使用 acluser 的 changePassword() 方法来修改密码。如果现有密码出错，将抛出异常。只要捕获异常就可以在界面提示用户输入出错了。</p>
+<h2 id="建立视图" class="article-heading"><a href="#建立视图" class="headerlink" title="建立视图"></a>建立视图<a class="article-anchor" href="#建立视图" aria-hidden="true"></a></h2><p>创建文件 app/view/users/changepasswd.php，内容为：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_extends(<span class="string">'_layouts/default_layout'</span>); <span class="meta">?&gt;</span></span></div><div class="line"> </div><div class="line"> </div><div class="line"><span class="comment">&lt;!-- // 定义一个名为 contents 的区块 --&gt;</span></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_block(<span class="string">'contents'</span>); <span class="meta">?&gt;</span></span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">"form_user"</span> <span class="attr">id</span>=<span class="string">"form_user"</span> <span class="attr">action</span>=<span class="string">"&lt;?php echo url('users/changepasswd'); ?&gt;"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">h1</span>&gt;</span>修改密码<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"username"</span>&gt;</span>现在使用的密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"old_password"</span> <span class="attr">id</span>=<span class="string">"old_password"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> $form[<span class="string">'old_password'</span>]-&gt;isValid() ? <span class="string">""</span> :  $form[<span class="string">'old_password'</span>]-&gt;errorMsg()[<span class="number">0</span>];<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"password"</span>&gt;</span>新密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"new_password"</span> <span class="attr">id</span>=<span class="string">"new_password"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> $form[<span class="string">'new_password'</span>]-&gt;isValid() ? <span class="string">""</span> :  $form[<span class="string">'new_password'</span>]-&gt;errorMsg()[<span class="number">0</span>];<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"password"</span>&gt;</span>重复新密码<span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"new_password2"</span> <span class="attr">id</span>=<span class="string">"new_password2"</span> /&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"error"</span>&gt;</span><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> $form[<span class="string">'new_password2'</span>]-&gt;isValid() ? <span class="string">""</span> :  $form[<span class="string">'new_password2'</span>]-&gt;errorMsg()[<span class="number">0</span>];<span class="meta">?&gt;</span></span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span> </div><div class="line">    </div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span> </div><div class="line">      <span class="tag">&lt;<span class="name">label</span>&gt;</span> <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">name</span>=<span class="string">"Submit"</span> <span class="attr">value</span>=<span class="string">"修 改"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"> </div><div class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></div><div class="line"> </div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="php"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_endblock(); <span class="meta">?&gt;</span></span></div></pre></td></tr></table></figure>
+<p><code>$form</code> 是个继承了<code>ArrayAccess</code>接口的表单对象实例，所以可以通过数组下标形式访问其内部的表单元素对象实例，例如<code>$form[&#39;old_password&#39;]</code>访问到的是old_password表单对象，然后调用他的实例方法<code>isValid()</code>判断该字段验证是否通过，不通过调用errorMsg()方法返回验证失败的所有错误信息（它是个数组）。</p>
+<p>输入错误的现在使用密码将会提示错误如图：</p>
+<p><img src="media/14947468967067.jpg" alt=""></p>
+<p>注意这次在重定向浏览器时调用的是 <code>_redirectMessage()</code>方法。这个方法会通过 <code>redirect_message</code> 视图来显示提示信息，能够让用户注意到操作的结果。如果有必要，可以将注册、登录等方法的重定向操作也改为使用带提示信息的重定向。集体源码可以参考<code>app/controller/abstract.php</code>文件。</p>
+<p><img src="media/14947471414694.png" alt=""></p>
+<p>现在用户方面的功能就基本上实现完了。下一节开始，我们将实现任务的管理功能。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-14T09:24:51.000Z" itemprop="dateModified">上次更新：2017-05-14</time>
+                <a href="users-login.html" class="article-footer-prev" title="登录和注销"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="acl-why.html" class="article-footer-next" title="为什么要使用访问控制"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/users-change-passwd.html';
+  var disqus_title = "实现用户注册（功能实现）";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#修改密码"><span class="toc-text">修改密码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#添加控制器动作"><span class="toc-text">添加控制器动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现修改密码表单"><span class="toc-text">实现修改密码表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建表单对象"><span class="toc-text">创建表单对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加控制器动作-1"><span class="toc-text">添加控制器动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立视图"><span class="toc-text">建立视图</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link current">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link current">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

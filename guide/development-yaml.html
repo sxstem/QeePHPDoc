@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>YAML 入门 | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/development-yaml.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/development-yaml.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/development-yaml.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">YAML 入门</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/development-yaml.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="YAML-入门" class="article-heading"><a href="#YAML-入门" class="headerlink" title="YAML 入门"></a>YAML 入门<a class="article-anchor" href="#YAML-入门" aria-hidden="true"></a></h1><p>QeePHP 为了方便开发者，大量使用了 YAML 格式的文件来存储配置信息。因此掌握阅读和书写 YAML 格式文档的基本知识是很有必要的。</p>
+<p>虽然 YAML 格式本身具有非常强大的表达能力，但在 QeePHP 只用到下列几种：</p>
+<ul>
+<li><strong>名值对</strong>，例如 key ⇒ value，这和 PHP 中以字符串做键名的数组一样；</li>
+<li><strong>列表</strong>，例如 value1, value2，这和 PHP 中以数字做键名的数组一样。<h2 id="YAML-实例" class="article-heading"><a href="#YAML-实例" class="headerlink" title="YAML 实例"></a>YAML 实例<a class="article-anchor" href="#YAML-实例" aria-hidden="true"></a></h2></li>
+</ul>
+<p>下面是一个 YAML 文件实例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#### 首页显示设置</span></div><div class="line"><span class="attr">homepage:</span></div><div class="line">  <span class="comment"># 首页内容缓存时间（秒）</span></div><div class="line"><span class="attr">  cached_lifetime:</span> <span class="number">300</span></div><div class="line">  <span class="comment"># 首页上显示多少条最新主题文章</span></div><div class="line"><span class="attr">  topics_num:</span> <span class="number">2</span></div><div class="line">  <span class="comment"># 首页上显示多少条最新社区活动</span></div><div class="line"><span class="attr">  activities_num:</span> <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>这个实例中，所有第一个非空白字符是“#”的行都是注释。而以“:”为结束符的字符串，代表了一个键名，“:”后面是键值。如果“:”后没有内容，则以缩进的后续行内容作为键值。所有以“:”分割的内容都成为“名值对”，也就是“名字”与“值”成对的内容。</p>
+<p>上面实例转换为 PHP 数组就是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(</div><div class="line">    <span class="string">'homepage'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">        <span class="string">'cached_lifetime'</span> =&gt; <span class="number">300</span>,</div><div class="line">        <span class="string">'topics_num'</span>      =&gt; <span class="number">2</span>,</div><div class="line">        <span class="string">'activities_num'</span>  =&gt; <span class="number">3</span>,</div><div class="line">    ),</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>再来看另一个实例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 后台管理菜单标签</span></div><div class="line"><span class="attr">admin_tabs:</span></div><div class="line">  <span class="string">"首页"</span><span class="string">:</span></div><div class="line"><span class="bullet">    -</span></div><div class="line"><span class="attr">      title:</span> <span class="string">"主题文章"</span></div><div class="line"><span class="attr">      udi:</span> <span class="string">"admin::topics/index"</span></div><div class="line"><span class="bullet">    -</span></div><div class="line"><span class="attr">      title:</span> <span class="string">"社区活动"</span></div><div class="line"><span class="attr">      udi:</span> <span class="string">"admin::activities/index"</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="string">"项目"</span><span class="string">:</span></div><div class="line"><span class="bullet">    -</span></div><div class="line"><span class="attr">      title:</span> <span class="string">"项目管理"</span></div><div class="line"><span class="attr">      udi:</span> <span class="string">"admin::projects/index"</span></div><div class="line">  <span class="comment">#</span></div><div class="line">  <span class="string">"应用"</span><span class="string">:</span></div><div class="line"><span class="bullet">    -</span></div><div class="line"><span class="attr">      title:</span> <span class="string">"应用展示管理"</span></div><div class="line"><span class="attr">      udi:</span> <span class="string">"admin::cases/index"</span></div></pre></td></tr></table></figure>
+<p>这个实例不但有名值对，而且有列表。所有第一个非空字符是“-”的行都代表一个列表的开始，并且后续缩进行的内容作为列表内容。该实例对应的 PHP 数组是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(</div><div class="line">    <span class="string">'admin_tabs'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">        <span class="string">'首页'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'主题文章'</span>, <span class="string">'udi'</span> =&gt; <span class="string">'admin::topics/index'</span>),</div><div class="line">            <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'社区活动'</span>, <span class="string">'udi'</span> =&gt; <span class="string">'admin::activities/index'</span>),</div><div class="line">        ),</div><div class="line">        <span class="string">'项目'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'项目管理'</span>, <span class="string">'udi'</span> =&gt; <span class="string">'admin::projects/index'</span>),</div><div class="line">        ),</div><div class="line">        <span class="string">'应用'</span> =&gt; <span class="keyword">array</span>(</div><div class="line">            <span class="keyword">array</span>(<span class="string">'title'</span> =&gt; <span class="string">'应用展示管理'</span>, <span class="string">'udi'</span> =&gt; <span class="string">'admin::/cases/index'</span>),</div><div class="line">        ),</div><div class="line">    ),</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>只要仔细比较上述两个实例及其对应的 PHP 数组，相信可以很好的理解 YAML 格式。</p>
+<h2 id="书写-YAML-文档" class="article-heading"><a href="#书写-YAML-文档" class="headerlink" title="书写 YAML 文档"></a>书写 YAML 文档<a class="article-anchor" href="#书写-YAML-文档" aria-hidden="true"></a></h2><p>在书写 YAML 文档时，最重要的就是注意缩进。YAML 格式要求缩进必须是两个空格，不能是制表字符，也不能是更多的空格。此外对于包含空格、特殊符号或汉字的键名和键值，最好用英文双引号括起来。</p>
+<p>在上面第二个实例那样书写多层内容时，务必确保内容间没有空行。如果不希望所有内容都挤在一堆，可以用“#”开头的注释来分割，但要确保注释也有正确的缩进。</p>
+<p>总结而言，书写 YAML 文档的要点如下：</p>
+<ul>
+<li><p><strong>注意缩进</strong><br>缩进只能是两个空格为一级，不能是其他字符。</p>
+</li>
+<li><p><strong>字符串应该用引号</strong><br>包含空格、特殊字符以及中文的字符串应该使用英文双引号括起来，不能使用中文引号。</p>
+</li>
+<li><p><strong>多层嵌套要注意缩进</strong><br>多层嵌套时，要注意正确的缩进，并且不能有空行。</p>
+</li>
+<li><p><strong>列表的另一种写法</strong><br>列表是很常用的数据类型，可以采用一种更简短的写法：</p>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">name:</span> <span class="string">["value1",</span> <span class="number">1234</span><span class="string">,</span> <span class="string">"cxx, mixed"</span><span class="string">]</span></div></pre></td></tr></table></figure>
+<p>YAML 是一种使用很方便的格式。但不幸的是 PHP 对 YAML 的支持很差，许多更有用的特性都存在问题。例如多行文本的书写在 PHP 解析后会出现多余的空格。不过用于存储一般的配置，YAML 有着 XML 和 PHP 数组无法比拟的优点。加上 QeePHP 对 YAML 的缓存能力，性能也不会是问题。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-10T07:41:04.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
+                <a href="development-database.html" class="article-footer-prev" title="创建数据库"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="development-configs.html" class="article-footer-next" title="修改配置文件"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/development-yaml.html';
+  var disqus_title = "YAML 入门";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#YAML-入门"><span class="toc-text">YAML 入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#YAML-实例"><span class="toc-text">YAML 实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#书写-YAML-文档"><span class="toc-text">书写 YAML 文档</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link current">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link current">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>添加路由规则 | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/routes-rules.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/routes-rules.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/routes-rules.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">添加路由规则</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/routes-rules.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="添加路由规则" class="article-heading"><a href="#添加路由规则" class="headerlink" title="添加路由规则"></a>添加路由规则<a class="article-anchor" href="#添加路由规则" aria-hidden="true"></a></h1><p>打开文件 configs/routes.yaml 文件，可以看到目前的默认路由规则：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">_default_:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">/:controller/:action/*</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">default</span></div><div class="line"><span class="attr">    action:</span> <span class="string">index</span></div></pre></td></tr></table></figure>
+<h2 id="路由的正向解析" class="article-heading"><a href="#路由的正向解析" class="headerlink" title="路由的正向解析"></a>路由的正向解析<a class="article-anchor" href="#路由的正向解析" aria-hidden="true"></a></h2><p>上面的规则中，“<em>default</em>”是规则的名称，每一条规则必须有一个唯一的名称。</p>
+<p>pattern 表示该规则是一个基于模式的规则，如果是 regx 则是基于正则的规则。同一条规则只能两者之中选一种，不同规则可以不同的类型。defaults 则指定各个变量的默认值。</p>
+<blockquote>
+<p>基于正则的路由适合非常复杂的情况。限于篇幅这里我们只大概说明一下基于模式的路由规则。</p>
+</blockquote>
+<p>pattern 的值就是要解析或最终生成的 URL 地址样式。这个 URL 用“/”符号分割为多个部分。而每一个以“:”开头的部分都是一个变量。例如“/:controller/:action/*”这个模式就由三个部分，其中前两个部分都是变量，而最后的则是通配符（关于通配符稍后再详细说明）。</p>
+<p>现在来看看这个模式怎么用于正向解析。</p>
+<ul>
+<li><strong>“/projects”</strong></li>
+</ul>
+<p>解析时，首先用“/”将 URL 地址分割为多个部分，然后与分割后的模式依次比对。</p>
+<ol>
+<li><p>模式的第一部分是 :controller 变量。而这个变量是一个内置变量，用于匹配的正则表达式是“([a-z][a-z0–9_])”，也就是说必须是“以字母开头，并且由字母、数字和下划线组成”。由于 project 完全符合这个要求，因此比对成功。</p>
+</li>
+<li><p>模式的第二部分是 :action 变量。:action 与 :controller 一样都是内置变量，比对规则也一样。但显然要比对的 URL 中已经没有第二部分了。但是我们看前面写的路由规则中已经通过 defaults 为 action 变量指定了默认值。所以比对成功。</p>
+</li>
+<li><p>模式的第三部分是“”通配符。“”通配符可以匹配任意数量成对出现的参数，由于 URL 中并没有多余参数，最终该路由规则的三个部分都比对成功。</p>
+</li>
+<li><p>比对成功后，projects 将会作为 :controller 变量的值，而 :action 变量使用了默认值。因此这个 URL 最后会被导向 projects 控制器的 index 动作。</p>
+</li>
+</ol>
+<ul>
+<li><strong>“/docs/show/id/2“</strong></li>
+</ul>
+<p>这个 URL 分割后有 4 个部分，按照前面的过程，前两个部分都会比对成功。而通配符则比对成功最后的“id”和“2”两个部分，最终将 URL 导向 docs 控制器的 show 动作，并且附带参数 id=2。</p>
+<p>再看一个复杂一点的例子:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="attr">projects_download:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">"/projects/:name/download/:file"</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">"projects"</span></div><div class="line"><span class="attr">    action:</span> <span class="string">"download"</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">"[a-z0-9]+"</span></div><div class="line"><span class="attr">    file:</span> <span class="string">"[0-9]+"</span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>“/projects/qeephp/download/2“</strong></li>
+</ul>
+<p>这个 URL 一共四个部分，依次比对的结果是：</p>
+<ol>
+<li><p>模式的第一部分不是变量，则以字符串方式和 URL 相同位置的部分进行比较。project 与 project 相同，因此比对通过。</p>
+</li>
+<li><p>模式的第二部分是 :name 变量。由于这个变量不是内置变量，因此需要通过 configs 来指定比对规则。:name 的比对规则是“[a-z0–9]+”（也是一个正则），和 qeephp 相比对，结果通过。</p>
+</li>
+<li><p>模式第三部分还是字符串，同样比对通过。</p>
+</li>
+<li><p>与 :name 变量类似，“2”完全符合 :file 变量的比对规则。至此比对全部通过，最终 URL 会被导向到 projects 控制器的 download 动作（两者都通过 defaults 指定），并且附带参数 name=qeephp 和 file=2。</p>
+</li>
+</ol>
+<p>在比对过程中，必须所有部分都比对成功才算通过，否则一律算作比对失败。一条规则比对失败，就会用下一条规则来比对，直到找到可以匹配的规则。如果所有规则都失败，那么会按照 /key/value 形式把 URL 转换为参数对。</p>
+<p>所以匹配范围更低的规则应该放在更前面。这样才能确保不会因为一个规则比另一个规则具有更大的匹配范围，而把匹配范围更小那个规则忽略了。</p>
+<h2 id="路由的反向解析" class="article-heading"><a href="#路由的反向解析" class="headerlink" title="路由的反向解析"></a>路由的反向解析<a class="article-anchor" href="#路由的反向解析" aria-hidden="true"></a></h2><p>与正向解析相比，反向解析复杂得多。因为反向解析是用参数来比对的，而不是 URL 地址。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">array</span>(</div><div class="line">    <span class="string">'controller'</span> =&gt; <span class="string">'projects'</span>,</div><div class="line">    <span class="string">'action'</span>     =&gt; <span class="string">'download'</span>,</div><div class="line">    <span class="string">'name'</span>       =&gt; <span class="string">'qeephp'</span>,</div><div class="line">    <span class="string">'file'</span>       =&gt; <span class="number">2</span>,</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>上面是生成 URL 的参数，用于匹配的规则有：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="attr">docs_page:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">"/docs/:name/:file"</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">"docs"</span></div><div class="line"><span class="attr">    action:</span> <span class="string">"page"</span></div><div class="line"><span class="attr">    file:</span> <span class="string">"index"</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">"[a-z0-9\-]+"</span></div><div class="line"><span class="attr">    file:</span> <span class="string">"[a-z0-9\-]+"</span></div><div class="line"> </div><div class="line"><span class="attr">projects_show:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">"/projects/:name"</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">"projects"</span></div><div class="line"><span class="attr">    action:</span> <span class="string">"show"</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">"[a-z0-9]+"</span></div><div class="line"> </div><div class="line"><span class="attr">projects_download_all:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">"/projects/:name/download"</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">"projects"</span></div><div class="line"><span class="attr">    action:</span> <span class="string">"download"</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">"[a-z0-9]+"</span></div><div class="line"> </div><div class="line"><span class="attr">projects_download:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">"/projects/:name/download/:file"</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">"projects"</span></div><div class="line"><span class="attr">    action:</span> <span class="string">"download"</span></div><div class="line"><span class="attr">  config:</span></div><div class="line"><span class="attr">    name:</span> <span class="string">"[a-z0-9]+"</span></div><div class="line"><span class="attr">    file:</span> <span class="string">"[0-9]+"</span></div></pre></td></tr></table></figure>
+<p>首先看第一个规则 docs_page 的比对过程：</p>
+<ul>
+<li><strong>“docs_page”</strong></li>
+</ul>
+<p>首先确定 docs_page 规则需要的变量，包括 :controller、:action、:file 和 :name。其中前三个变量都具有默认值。</p>
+<p>比对第一个变量 :controller。这个变量在 docs_page 中指定为 docs。而提供的参数中 :controller 的值是 projects。此时就要检查 :controller 是否在 configs 中指定了比对规则。如果指定了比对规则，那么 defaults 中为 :controller 指定的就是一个“建议值”。只要 :controller 符合比对规则也算通过。但现在 configs 并没有指定 :controller 的规则，因此比对失败。</p>
+<ul>
+<li><strong>“projects_show”</strong></li>
+</ul>
+<p>参考 docs_page 的比对过程，:controller 变量可以通过，但 :action 变量却比对失败。</p>
+<ul>
+<li><strong>“projects_download_all”</strong></li>
+</ul>
+<p>:controller、:action 变量都通过了比对。在比对 :name 时，按照 configs 中为 :name 指定的规则，:name 也通过了比对。接下来该路由规则已经没有更多变量了，但参数中却还有一个 file，因此算作比对失败。</p>
+<ul>
+<li><strong>“projects_download”</strong></li>
+</ul>
+<p>这个规则的四个变量和参数完全符合，因此比对通过。比对通过后，将生成 /projects/qeephp/download/2 这样的 URL。而这个 URL 在正向解析时又符合同一条规则，最终实现了 url() 方法生成 URL 地址导向到正确控制器和动作的目的。</p>
+<h2 id="添加路由规则-1" class="article-heading"><a href="#添加路由规则-1" class="headerlink" title="添加路由规则"></a>添加路由规则<a class="article-anchor" href="#添加路由规则-1" aria-hidden="true"></a></h2><p>在实际应用中，大多数 URL 使用默认的路由规则就足够了。少数 URL 可以进行适当的美化。例如 /tasks/edit/task_id/1 应该美化为 /tasks/edit/1。为了实现这个目的，我们修改 configs/routes.yaml，在默认规则<strong>前</strong>添加一条规则：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">tasks_edit:</span></div><div class="line"><span class="attr">  pattern:</span> <span class="string">/tasks/edit/:task_id</span></div><div class="line"><span class="attr">  defaults:</span></div><div class="line"><span class="attr">    controller:</span> <span class="string">tasks</span></div><div class="line"><span class="attr">    action:</span> <span class="string">edit</span></div><div class="line"><span class="attr">  configs:</span></div><div class="line"><span class="attr">    task_id:</span> <span class="string">"[0-9]+"</span></div></pre></td></tr></table></figure>
+<p>刷新浏览器后，再点击任务标题可以看到 URL 地址已经改变为预期的形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost/todo/public/tasks/edit/1</div></pre></td></tr></table></figure>
+<p>将把 /tasks/index/page/3 改写为 /tasks/page/3。</p>
+<p>读者朋友们可以尝试各种写法，找到适合自己的使用方式。更复杂的基于正则的路由，请参考开发指南。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-15T08:17:37.000Z" itemprop="dateModified">上次更新：2017-05-15</time>
+                <a href="routes-configs.html" class="article-footer-prev" title="启用 URL 路由"><i class="fa fa-chevron-left"></i><span>上一页</span></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/routes-rules.html';
+  var disqus_title = "添加路由规则";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加路由规则"><span class="toc-text">添加路由规则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#路由的正向解析"><span class="toc-text">路由的正向解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由的反向解析"><span class="toc-text">路由的反向解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加路由规则-1"><span class="toc-text">添加路由规则</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link current">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link current">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

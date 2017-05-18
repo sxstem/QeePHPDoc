@@ -1464,6 +1464,7 @@ pre code {
   padding: 0;
   border: none;
   background: none;
+  margin-right: 10px;
 }
 .highlight .line {
   height: 22px;

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>控制器 | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-controller.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/start-mvc-controller.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-controller.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">控制器</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/start-mvc-controller.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="控制器" class="article-heading"><a href="#控制器" class="headerlink" title="控制器"></a>控制器<a class="article-anchor" href="#控制器" aria-hidden="true"></a></h1><p>控制器在 MVC 模式中充当了模型和视图的桥梁。控制器负责处理请求，并调用模型完成业务操作，最后返回适当的视图对象。而应用程序对象则执行视图对象来构造输出内容，并将输出内容返回给浏览器。<br><img src="media/14943999713374.png" alt=""></p>
+<h2 id="控制器和动作方法" class="article-heading"><a href="#控制器和动作方法" class="headerlink" title="控制器和动作方法"></a>控制器和动作方法<a class="article-anchor" href="#控制器和动作方法" aria-hidden="true"></a></h2><p>通常，我们的应用程序会提供一系列的 URL 地址给用户。通过访问这些 URL 地址就可以使用应用程序的不同功能。例如“create.php”表示创建，而“edit.php”表示修改。由于 QeePHP 采用了 MVC 模式，所以我们不需要为每一个功能都编写一个单独的 PHP 文件。我们可以把一组相关的功能放到一个控制器中，而控制器的每一个动作方法就是一项独立的功能。</p>
+<p>由于整个应用程序的所有功能都是通过入口文件来访问的。这要求我们通过不同的 URL 参数来指定要访问的控制器及动作方法。这样应用程序对象通过检查 URL 中的参数，就可以确定用户想调用的控制器和动作方法。</p>
+<h2 id="通过-URL-参数指定控制器和动作" class="article-heading"><a href="#通过-URL-参数指定控制器和动作" class="headerlink" title="通过 URL 参数指定控制器和动作"></a>通过 URL 参数指定控制器和动作<a class="article-anchor" href="#通过-URL-参数指定控制器和动作" aria-hidden="true"></a></h2><p>我们来做个测试，修改 app/controller/default_controller.php 文件，加入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">actionTest</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"OK, default 控制器的 test 动作被调用。"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后通过浏览器访问 <a href="http://localhost/todo/public/index.php?controller=default&amp;action=test" target="_blank" rel="external">http://localhost/todo/public/index.php?controller=default&amp;action=test</a> ，即可看到我们在 actionTest() 动作方法中写入的文字。</p>
+<p><img src="media/14944001039969.png" alt=""></p>
+<p>在上面的例子中，如果注意到 URL 地址中包含的“controller=default&amp;action=test”就会明白通过名为“controller”和“action”的参数，可以指定我们要调用的控制器和动作方法。</p>
+<p>依此类推，<a href="http://localhost/todo/public/index.php?**controller=users&amp;action=create**" target="_blank" rel="external">http://localhost/todo/public/index.php?**controller=users&amp;action=create**</a> 这个 URL 指定了要访问 users 控制器的 create 动作方法。</p>
+<h2 id="动作方法" class="article-heading"><a href="#动作方法" class="headerlink" title="动作方法"></a>动作方法<a class="article-anchor" href="#动作方法" aria-hidden="true"></a></h2><p>前面反复提到的动作方法是我们在控制器类中添加的特定方法。这些方法的名称都是以“action”开头，例如 actionTest()、actionIndex() 等。之所以要求必须以“action”开头，是为了避免用户从浏览器访问到控制器中不希望被外部访问的一些方法。</p>
+<p>有一个特别的动作方法 actionIndex() 是控制器的默认动作。假如我们没有在 URL 参数中指定要调用的动作方法，那么就会调用控制器的 actionIndex() 动作方法。同理，如果没有在 URL 参数中指定要调用的控制器，就会调用 default 这个默认控制器。</p>
+<h2 id="美化-URL" class="article-heading"><a href="#美化-URL" class="headerlink" title="美化 URL"></a>美化 URL<a class="article-anchor" href="#美化-URL" aria-hidden="true"></a></h2><p>可能读者朋友觉得上面的 URL 又臭又长，看上去难看，而且影响 SEO。不过没关系，QeePHP 的 URL 路由器可以让我们构造任意形式的 URL，这里举例使用的 URL 样式是默认样式。有关美化 URL 的内容会在本教程的后续部分说明。</p>
+<blockquote>
+<p>默认 URL 样式虽然不美观，但是兼容任何服务器环境。当服务器运行环境不支持 URL 路由器时，我们可以使用默认样式来保证应用程序可以正常工作。</p>
+</blockquote>
+<h2 id="总结" class="article-heading"><a href="#总结" class="headerlink" title="总结"></a>总结<a class="article-anchor" href="#总结" aria-hidden="true"></a></h2><p>总结一下：</p>
+<ul>
+<li><p><strong>控制器</strong><br>控制器是一个类，定义在 controller/ 目录中。文件名是“控制器名称_controller.php”，例如 default_controller.php。</p>
+</li>
+<li><p><strong>控制器名称</strong><br>控制器名称只能是 26 个字母和 10 个数字组成，并且不区分大小写。</p>
+</li>
+<li><p><strong>动作方法</strong><br>动作方法是控制器类中以“action”开头的方法，例如 actionTest()。</p>
+</li>
+<li><p><strong>动作名称</strong><br>只能是 26 个字母和 10 个数字组成，并且不区分大小写。</p>
+</li>
+<li><p><strong>指定要调用的控制器和动作方法</strong><br>URL 参数 controller 和 action 分别用于指定要调用的控制器和动作方法。</p>
+</li>
+<li><p><strong>默认动作方法</strong><br>未在 URL 参数中指定要调用的动作方法时，将会调用控制器的 actionIndex() 动作方法。</p>
+</li>
+<li><p><strong>默认控制器</strong><br>未在 URL 参数中指定要调用的控制器时，将会调用 default 这个默认控制器。</p>
+</li>
+</ul>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-16T07:22:02.000Z" itemprop="dateModified">上次更新：2017-05-16</time>
+                <a href="start-mvc-start.html" class="article-footer-prev" title="MVC模式启动"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="development-database.html" class="article-footer-next" title="创建数据库"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-controller.html';
+  var disqus_title = "控制器";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#控制器"><span class="toc-text">控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#控制器和动作方法"><span class="toc-text">控制器和动作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过-URL-参数指定控制器和动作"><span class="toc-text">通过 URL 参数指定控制器和动作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动作方法"><span class="toc-text">动作方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#美化-URL"><span class="toc-text">美化 URL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link current">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link current">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

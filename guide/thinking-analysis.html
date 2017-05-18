@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>需求分析 | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/thinking-analysis.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/thinking-analysis.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/thinking-analysis.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">需求分析</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/thinking-analysis.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="需求分析" class="article-heading"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析<a class="article-anchor" href="#需求分析" aria-hidden="true"></a></h1><p>需求分析的主要工作就是分析用户想要实现的功能，找出可行的解决方案，并且整理为下一步开发工作需要的资料。在领域驱动开发过程中，需求分析实际上就是找出领域中存在的模型，并且确定这些模型的职责。</p>
+<p>虽然从领域中提取模型的方法很多，但大多数时候，使用用况分析是比较简单的办法。用况分析可以确定领域中的参与者以及这些参与者要完成的任务，从而找出领域中存在的模型。</p>
+<p><img src="media/14944061989865.png" alt=""></p>
+<blockquote>
+<p>用况图很容易理解，人形图标表示使用者。使用者可能是人类，也可能是其他程序（例如一个功能模块）。而每一个椭圆，代表软件系统中的一种功能，而人形图标和椭圆之间的连接线表示使用者会用到该功能。</p>
+</blockquote>
+<p>还是回到我们将要创建的 todo 应用。从上图可以看出，todo 应用中，存在“用户”和“任务”两个“名词”。这两个名词暗示了系统中应该存在与之对应的模型。</p>
+<p>通过分析用况，可以很容易的找出领域中的“用户”和“任务”两个模型。</p>
+<h2 id="确定模型的属性" class="article-heading"><a href="#确定模型的属性" class="headerlink" title="确定模型的属性"></a>确定模型的属性<a class="article-anchor" href="#确定模型的属性" aria-hidden="true"></a></h2><p>根据进一步的分析和以往经验，我们可以初步确定“用户”和“任务”这两个模型应该具备的属性：</p>
+<p><strong>模型 user 的属性</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>密码</td>
+</tr>
+</tbody>
+</table>
+<p><strong>模型 task 的属性</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subject</td>
+<td>任务的主题</td>
+</tr>
+<tr>
+<td>description</td>
+<td>任务的描述</td>
+</tr>
+<tr>
+<td>is_completed</td>
+<td>指示任务是否已经完成</td>
+</tr>
+<tr>
+<td>created</td>
+<td>任务添加的日期</td>
+</tr>
+</tbody>
+</table>
+<p>将表格转换为类图，可以更直观的表现类的概貌。<br><img src="media/14944070943957.png" alt=""></p>
+<p>有了类的基本概貌，我们再来标明两个模型之间的关系。</p>
+<p>因为“任务”必然是属于某一个“用户”的，所以我们为 Task 类添加一个 owner 属性，用于指示该“任务”所属的“用户”。而 User 类则添加一个 tasks 属性，用于包含该“用户”创建的所有“任务”。<br><img src="media/14944071134141.png" alt=""></p>
+<p>进行到这里，“任务”对象和“用户”对象之间的关联就要跃然纸上了。</p>
+<h2 id="确定模型间的关系" class="article-heading"><a href="#确定模型间的关系" class="headerlink" title="确定模型间的关系"></a>确定模型间的关系<a class="article-anchor" href="#确定模型间的关系" aria-hidden="true"></a></h2><p>对象间的关系有三种最重要的关系：依赖、关联和泛化。</p>
+<p>依赖是使用关系。例如“台灯”依赖“灯泡”来发光。<br>关联是对象间的结构关系。例如“用户”与一组“任务”相关。<br>泛化是对象间的继承。例如“VIP 用户”类是“用户”类的继承类。</p>
+<p>在 todo 应用中，只存在“关联”一种关系。但是“任务”和“用户”在关联的两端并不是处于同一层次。由于“任务”不可能单独存在，必然是属于某一个“用户”的。因此两者的关联是“用户”聚合了“任务”，在该关联关系中，“任务”属于从属地位。<br><img src="media/14944071727892.png" alt=""></p>
+<p>对象在关联关系中的位置和地位，决定了如何为关联关系进行建模。后续的章节中，我们将用代码将关联关系以及关系本身的特点体现出来。</p>
+<h2 id="确定模型的行为" class="article-heading"><a href="#确定模型的行为" class="headerlink" title="确定模型的行为"></a>确定模型的行为<a class="article-anchor" href="#确定模型的行为" aria-hidden="true"></a></h2><p>确定了模型的属性和模型间的关系，我们还需要确定模型的行为。这就需要通过分解业务逻辑来明确模型在逻辑中的行为。</p>
+<p>例如“创建任务”这个逻辑，要求用户输入任务主题、描述（可选），然后创建一个“任务”模型对象实例并保存起来。因此这个逻辑中，“任务”模型的行为就是“创建”。而这恰好和“创建任务”这个逻辑中包含的“动词”相同。所以很大程度上，用况中包含的名词暗示了模型，而动词则暗示了模型应该具备的行为。</p>
+<p>按照上述的简单规则，我们可以列出模型应该具备的行为：</p>
+<p><strong>模型 user 的行为</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>login</td>
+<td>登录</td>
+</tr>
+<tr>
+<td>logout</td>
+<td>注销</td>
+</tr>
+<tr>
+<td>createTask</td>
+<td>创建属于该用户的任务</td>
+</tr>
+<tr>
+<td>loadTasks</td>
+<td>载入属于该用户的任务</td>
+</tr>
+</tbody>
+</table>
+<p><strong>模型 task 的行为</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delete</td>
+<td>删除任务</td>
+</tr>
+</tbody>
+</table>
+<p>由于任务不可能脱离用户存在，所以大部分行为都集中在 user 模型中。</p>
+<p>但是稍加分析会发现，user 模型的 login 和 logout 方法是不需要的，因为“登录”和“注销”实际上并不是业务逻辑。</p>
+<p>“登录”是用户从系统取得使用授权的过程，整个用况分解为“提供用户界面输入用户名和密码 → 验证用户输入的用户名和密码 → 为用户提供授权”这样一组步骤。在这个系列步骤中，只有“验证用户输入的用户名和密码”属于业务逻辑，而其余两个步骤前面一个属于表现层的工作，后面一个属于应用程序基础设施的工作。同样，“注销”是清除用户从系统获得的使用授权，因此 login 和 logout 本质上与 user 模型本身其实毫无关系。</p>
+<p>所以经过调整后，user 模型的行为如下：</p>
+<p><strong>user 模型调整后的行为</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validateLogin</td>
+<td>验证用户名和密码</td>
+</tr>
+<tr>
+<td>createTask</td>
+<td>创建属于该用户的任务</td>
+</tr>
+<tr>
+<td>loadTasks</td>
+<td>载入属于该用户的任务</td>
+</tr>
+</tbody>
+</table>
+<p><img src="media/14944283479060.png" alt=""></p>
+<p>在确定模型的属性和行为时，我们就是在使用面向对象的思想来设计我们的应用程序。这个环节中，我们要找出系统中必须的模型，并搞清楚这些模型在各个逻辑中需要承担的责任。</p>
+<p>应用程序的规模越大，花在这个环节的精力也越多。但是在这个阶段一定要避免“过度设计”这个常见的问题。</p>
+<blockquote>
+<p>“过度设计”通常表现为几乎无限制度的分解业务需求、创建关联关系以及类定义。过度设计不但会造成结构复杂，还很容易出现性能问题和维护困难。更重要的是在应用程序开发初期，所有对于“未来需求”的预测，越是精确就越不准确，最终只会造成浪费。</p>
+</blockquote>
+<p>现在，我们已经为创建模型做好了准备工作。</p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-10T14:59:38.000Z" itemprop="dateModified">上次更新：2017-05-10</time>
+                <a href="thinking-oo.html" class="article-footer-prev" title="用对象来思考"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="thinking-creating-models.html" class="article-footer-next" title="创建需要的模型"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/thinking-analysis.html';
+  var disqus_title = "需求分析";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#需求分析"><span class="toc-text">需求分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#确定模型的属性"><span class="toc-text">确定模型的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确定模型间的关系"><span class="toc-text">确定模型间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确定模型的行为"><span class="toc-text">确定模型的行为</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link current">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link current">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

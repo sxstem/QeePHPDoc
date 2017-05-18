@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8">
+  <title>实现用户注册（功能实现） | QeePHP文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://jacklucky.github.io/QeePHPDoc/guide/users-login.html">
+  <!-- Alternative links -->
+  
+    
+      <link rel="alternative" hreflang="zh-cn" href="https://jacklucky.github.io/QeePHPDoc/zh-cn/guide/users-login.html">
+    
+      <link rel="alternative" hreflang="en" href="https://jacklucky.github.io/QeePHPDoc/guide/users-login.html">
+    
+  
+  <!-- Icon -->
+  
+  <!-- CSS -->
+  <!-- build:css build/css/navy.css -->
+  <link rel="stylesheet" href="/QeePHPDoc/css/navy.css">
+  <!-- endbuild -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css">
+  <!-- RSS -->
+  <link rel="alternate" href="/QeePHPDoc/atom.xml" title="QeePHP文档">
+  <!-- Open Graph -->
+  
+  <!-- Google Analytics -->
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?15de9d94575a80147b81396595254188";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <!-- Github Button -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body>
+  <div id="container">
+   
+    <header id="header" class="wrapper">
+  <div id="header-inner" class="inner">
+    <h1 id="logo-wrap">
+      <a href="/zh-cn/QeePHPDoc/" id="logo">Hexo</a>
+    </h1>
+    <nav id="main-nav">
+      <a href="/QeePHPDoc/" class="main-nav-link">首页</a><a href="/QeePHPDoc/guide" class="main-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="main-nav-link">文档</a><a href="/QeePHPDoc/news/" class="main-nav-link">新闻</a>
+      <a href="https://github.com/jackLucky" class="main-nav-link"><i class="fa fa-github-alt"></i></a>
+      <div id="search-input-wrap">
+        <div id="search-input-icon">
+          <i class="fa fa-search"></i>
+        </div>
+        <input type="search" id="search-input" placeholder="Search...">
+      </div>
+    </nav>
+    <div id="lang-select-wrap">
+      <label id="lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></label>
+      <select id="lang-select" data-canonical="">
+        
+          <option value="zh-cn" selected>简体中文</option>
+        
+          <option value="en">English</option>
+        
+      </select>
+    </div>
+    <a id="mobile-nav-toggle">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+  </div>
+</header>
+
+    <div id="content-wrap">
+  <div id="content" class="wrapper">
+    <div id="content-inner">
+      <article class="article-container" itemscope itemtype="http://schema.org/Article">
+        <div class="article-inner">
+          <div class="article">
+            <div class="inner">
+              <header class="article-header">
+                <h1 class="article-title" itemprop="name">实现用户注册（功能实现）</h1>
+                <a href="https://github.com/hexojs/site/edit/master/source/guide/users-login.md" class="article-edit-link" title="改进本文"><i class="fa fa-pencil"></i></a>
+              </header>
+              <div class="article-content" itemprop="articleBody">
+                <h1 id="用户登录和注销" class="article-heading"><a href="#用户登录和注销" class="headerlink" title="用户登录和注销"></a>用户登录和注销<a class="article-anchor" href="#用户登录和注销" aria-hidden="true"></a></h1><p>通过前面实现用户注册功能，我们了解了如何完善模型及创建表单。这一个小节我们来实现用户的登录和注销功能。</p>
+<h2 id="实现登录" class="article-heading"><a href="#实现登录" class="headerlink" title="实现登录"></a>实现登录<a class="article-anchor" href="#实现登录" aria-hidden="true"></a></h2><p>修改 users 控制器，加入下列代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">$form_error = <span class="keyword">array</span>();</div><div class="line">    </div><div class="line"><span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_context-&gt;isPOST() &amp;&amp;  <span class="keyword">empty</span>($form_error = User::meta()-&gt;validate($_POST)))</div><div class="line">&#123;</div><div class="line">   <span class="keyword">try</span></div><div class="line">   &#123;</div><div class="line">       <span class="comment">// 使用 acluser 插件的 validateLogin() 方法验证登录并取得有效的 user 对象</span></div><div class="line">       $user = User::meta()-&gt;validateLogin(<span class="keyword">$this</span>-&gt;_context-&gt;post(<span class="string">'username'</span>), <span class="keyword">$this</span>-&gt;_context-&gt;post(<span class="string">'password'</span>));</div><div class="line">       <span class="comment">// 将登录用户的信息存入 SESSION，以便应用程序记住用户的登录状态</span></div><div class="line">       <span class="keyword">$this</span>-&gt;_app-&gt;changeCurrentUser($user-&gt;aclData(), <span class="string">'MEMBER'</span>);</div><div class="line">       <span class="comment">// 登录成功后，重定向浏览器</span></div><div class="line">       <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_redirect(url(<span class="string">'default/index'</span>));</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">catch</span> (AclUser_UsernameNotFoundException $ex)</div><div class="line">   &#123;</div><div class="line">       $form_error[<span class="string">'username'</span>][] = (<span class="string">"您输入的用户名 &#123;$this-&gt;_context-&gt;post('username')&#125; 不存在"</span>);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">catch</span> (AclUser_WrongPasswordException $ex)</div><div class="line">   &#123;</div><div class="line">       $form_error[<span class="string">'password'</span>][] = (<span class="string">"您输入的密码不正确"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line"> </div><div class="line">  <span class="keyword">$this</span>-&gt;_view[<span class="string">'form_error'</span>] = $form_error;</div></pre></td></tr></table></figure>
+<p>这段代码中有两个地方需要说明一下。</p>
+<h2 id="调用行为插件的方法" class="article-heading"><a href="#调用行为插件的方法" class="headerlink" title="调用行为插件的方法"></a>调用行为插件的方法<a class="article-anchor" href="#调用行为插件的方法" aria-hidden="true"></a></h2><p>acluser 行为插件为模型扩展了多个方法，包括：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>用途</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validateLogin()</td>
+<td>验证用户登录并返回用户对象</td>
+<td>类方法</td>
+</tr>
+<tr>
+<td>validateUsername()</td>
+<td>验证用户名</td>
+<td>类方法</td>
+</tr>
+<tr>
+<td>validatePassword()</td>
+<td>验证用户名和密码</td>
+<td>类方法</td>
+</tr>
+<tr>
+<td>changePassword()</td>
+<td>修改指定用户的密码</td>
+<td>类方法</td>
+</tr>
+<tr>
+<td>checkPassword()</td>
+<td>检查指定的密码是否与当前用户的密码相符</td>
+<td>实例方法</td>
+</tr>
+<tr>
+<td>changePassword()</td>
+<td>修改当前用户的密码</td>
+<td>实例方法</td>
+</tr>
+<tr>
+<td>updateLogin()</td>
+<td>更新用户的登录信息</td>
+<td>实例方法</td>
+</tr>
+<tr>
+<td>aclRoles()</td>
+<td>获得包含用户所有角色名的数组</td>
+<td>实例方法</td>
+</tr>
+<tr>
+<td>aclData()</td>
+<td>获得用户的 ACL 数据</td>
+<td>实例方法</td>
+</tr>
+</tbody>
+</table>
+<p><strong>类方法</strong>是指调用该方法不需要构造模型<strong>对象实例</strong>，而实例方法则只能通过模型对象实例来调用。</p>
+<p>要调用一个类方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">User::meta()-&gt;validateLogin();</div></pre></td></tr></table></figure>
+<p>调用一个实例方法则是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$user-&gt;changePassword();</div></pre></td></tr></table></figure>
+<p>可以看出，类方法必须通过 meta() 方法返回的连贯接口来调用。</p>
+<p>在用户登录中，我们用到了 acluser 插件提供的 validateLogin() 类方法，所以调用方式就是：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$user = User::meta()-&gt;validateLogin($form[<span class="string">'username'</span>]-&gt;value, $form[<span class="string">'password'</span>]-&gt;value);</div></pre></td></tr></table></figure>
+<p>validateLogin() 方法检查用户名和密码的正确性，如果检查通过就返回有效的用户对象，否则抛出不同的异常。通过拦截异常我们就可以给用户反馈合适的错误信息。</p>
+<blockquote>
+<p>acluser 插件源码在 qeephp框架的 library/extend/behavior/acluser.php中，看源码和代码注释掌握使用方法，后面的教程我们将讲解如何开发新的行为插件</p>
+</blockquote>
+<h2 id="记住用户的登录状态" class="article-heading"><a href="#记住用户的登录状态" class="headerlink" title="记住用户的登录状态"></a>记住用户的登录状态<a class="article-anchor" href="#记住用户的登录状态" aria-hidden="true"></a></h2><p>登录成功，我们必须让应用程序记住用户的登录状态，不然用户一刷新页面，又变成未登录了。在 QeePHP 自动生成的应用程序对象中，已经提供了一系列方法来完成这项工作：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>changeCurrentUser</td>
+<td>将用户数据保存到 session 中</td>
+</tr>
+<tr>
+<td>currentUser()</td>
+<td>获取保存在 session 中的用户数据</td>
+</tr>
+<tr>
+<td>currentUserRoles()</td>
+<td>获取 session 中用户信息包含的角色</td>
+</tr>
+<tr>
+<td>cleanCurrentUser()</td>
+<td>从 session 中清除用户数据</td>
+</tr>
+</tbody>
+</table>
+<p>所以要让应用程序记住用户的登录状态，调用 changeCurrentUser() 方法就可以了。</p>
+<blockquote>
+<p>具体可以查看项目文件 app/myapp.php 源码了解更多。</p>
+</blockquote>
+<h2 id="添加登录需要的视图" class="article-heading"><a href="#添加登录需要的视图" class="headerlink" title="添加登录需要的视图"></a>添加登录需要的视图<a class="article-anchor" href="#添加登录需要的视图" aria-hidden="true"></a></h2><p>我们还没有添加登录页面需要的视图，不过由于登录和注册的页面内容几乎一样，所以我们直接把注册的视图复制到 login.php 视图页面。修改下标题为登入即可。修改好后，访问 <a href="">http://localhost/todo/public/index.php?controller=users&amp;action=login</a>测试一下登录功能吧。<br><img src="media/14945596325120.jpg" alt=""></p>
+<h2 id="实现注销" class="article-heading"><a href="#实现注销" class="headerlink" title="实现注销"></a>实现注销<a class="article-anchor" href="#实现注销" aria-hidden="true"></a></h2><p>既然有登录，就有注销，在 users 控制器新增方法 actionLogout()：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">actionLogout</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// 清除当前用户的登录信息</span></div><div class="line">    <span class="keyword">$this</span>-&gt;_app-&gt;cleanCurrentUser();</div><div class="line">    <span class="comment">// 重定向浏览器</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_redirect(url(<span class="string">'default/index'</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="在用户界面上显示登录状态" class="article-heading"><a href="#在用户界面上显示登录状态" class="headerlink" title="在用户界面上显示登录状态"></a>在用户界面上显示登录状态<a class="article-anchor" href="#在用户界面上显示登录状态" aria-hidden="true"></a></h2><p>现在注册、登录和注销功能都做好了，但是用户界面上还没有相应的链接，而且也没有显示出用户的登录状态。</p>
+<p>在编码之前，我们可以打开 app/view/_layouts/default_layout.php 文件来看看。可以看到其中有一行：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_element(<span class="string">'sidebar'</span>); <span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>这行代码载入了一个名为 sidebar 的视图片段，显示出来的效果就是：<br><img src="media/14945597543478.png" alt=""></p>
+<p>在视图中，可以用“$this-&gt;_element(片段名)”来载入一个视图片段，该视图片段存储为“app/view/_elements/片段名_element.php”文件。例如“sidebar”视图片段对应的文件名就是“app/view/_elements/sidebar_element.php”。</p>
+<p>视图片段通常用于一些在各个页面都会重复出现的内容，例如页头、页脚等。合理使用视图片段可以极大减少视图中存在的重复代码。不过视图片段并不能够处理自己需要的数据，所以像显示当前用户登录信息这样的需求，我们需要使用用户界面控件。</p>
+<h2 id="用户界面组件化" class="article-heading"><a href="#用户界面组件化" class="headerlink" title="用户界面组件化"></a>用户界面组件化<a class="article-anchor" href="#用户界面组件化" aria-hidden="true"></a></h2><p>在前面的章节中，看到如何通过视图的继承和区块来分拆用户界面，最终获得各个可以重用的部分。而用户界面控件就是一种更强大的手段，可以将用户界面上的一个独立区域封装起来。</p>
+<p>这个区域不但有自己的表现，还可以有自己的数据。例如“最新10个回复”这个控件可以自己查询最新的 10 个回复数据，然后载入自己的视图来构造 HTML 代码。而在传统开发模式中，如果某个页面需要“最新10个回复”这个区域，就必须在该页面对应的控制器动作中查询需要的数据。最终，各个控制器动作中都重复着相同的代码。</p>
+<p>QeePHP 利用用户界面控件机制，彻底解决了这个问题，完全符合 DRY 原则。现在我们来把 sidebar 这个视图片段转换为一个用户界面控件。</p>
+<p>用户界面通常由控件类和控件视图两部分组成。控件类都放置在 app/control/ 目录中。我们现在新建文件 app/control/sidebar.php 文件，内容如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Control_Sidebar</span> <span class="keyword">extends</span> <span class="title">QUI_Control_Abstract</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">render</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 从对象注册表中查询 app 对象</span></div><div class="line">        $app = Q::registry(<span class="string">'app'</span>);</div><div class="line">        <span class="comment">// 取得当前用户的信息</span></div><div class="line">        <span class="keyword">$this</span>-&gt;_view[<span class="string">'current_user'</span>] = $app-&gt;currentUser();</div><div class="line">        <span class="comment">// 渲染视图并返回结果</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_fetchView(dirname(<span class="keyword">__FILE__</span>) . <span class="string">'/sidebar_view'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后将文件 app/view/_elements/sidebar_element.php 移动到 app/control/ 目录，并改名为 sidebar_view.php。打开该文件，在适当位置添加如下内容：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?php if (empty($current_user)): ?&gt;</div><div class="line"> </div><div class="line">    &lt;li&gt;</div><div class="line">      &lt;h3&gt;用户登录&lt;/h3&gt;</div><div class="line">      &lt;ul class="links"&gt;</div><div class="line">        &lt;li&gt;&lt;a href="&lt;?php echo url('users/login'); ?&gt;"&gt;登录&lt;/a&gt;&lt;/li&gt;</div><div class="line">        &lt;li&gt;&lt;a href="&lt;?php echo url('users/register'); ?&gt;"&gt;注册新用户&lt;/a&gt;&lt;/li&gt;</div><div class="line">      &lt;/ul&gt;</div><div class="line">    &lt;/li&gt;</div><div class="line"> </div><div class="line">&lt;?php else: ?&gt;</div><div class="line"> </div><div class="line">    &lt;li&gt;</div><div class="line">      &lt;h3&gt;欢迎：&lt;?php echo h($current_user['username']); ?&gt;&lt;/h3&gt;</div><div class="line">      &lt;ul class="links"&gt;</div><div class="line">        &lt;li&gt;用户名：&lt;?php echo h($current_user['username']); ?&gt;&lt;/li&gt;</div><div class="line">        &lt;li&gt;用户ID：&lt;?php echo ($current_user['id']); ?&gt;&lt;/li&gt;</div><div class="line">        &lt;li&gt;&lt;a href="&lt;?php echo url('users/changepasswd'); ?&gt;"&gt;修改密码&lt;/a&gt;&lt;/li&gt;</div><div class="line">        &lt;li&gt;&lt;a href="&lt;?php echo url('users/logout'); ?&gt;"&gt;注销&lt;/a&gt;&lt;/li&gt;</div><div class="line">      &lt;/ul&gt;</div><div class="line">    &lt;/li&gt;</div><div class="line"> </div><div class="line">&lt;?php endif; ?&gt;</div></pre></td></tr></table></figure>
+<p>最后，修改 app/view/_layouts/default_layout.php 文件，将：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_element(<span class="string">'sidebar'</span>); <span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>改为： </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span> <span class="keyword">$this</span>-&gt;_control(<span class="string">'sidebar'</span>); <span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>刷新浏览器，并尝试登录和注册，观察侧边栏的变化：</p>
+<p><strong>未登录：</strong><br><img src="media/14945612827980.png" alt=""></p>
+<p><strong>已登录:</strong><br><img src="media/14945612987922.png" alt=""></p>
+
+              </div>
+              <footer class="article-footer">
+                <time class="article-footer-updated" datetime="2017-05-12T03:55:00.000Z" itemprop="dateModified">上次更新：2017-05-12</time>
+                <a href="users-register-code.html" class="article-footer-prev" title="注册（功能）"><i class="fa fa-chevron-left"></i><span>上一页</span></a><a href="users-change-passwd.html" class="article-footer-next" title="修改密码"><span>下一页</span><i class="fa fa-chevron-right"></i></a>
+              </footer>
+              
+<section id="comments">
+  <div id="disqus_thread"></div>
+</section>
+<script>
+  var disqus_shortname = 'hexojs';
+  var disqus_url = 'https://jacklucky.github.io/QeePHPDoc/guide/users-login.html';
+  var disqus_title = "实现用户注册（功能实现）";
+  var disqus_config = function(){
+    this.language = 'zh-cn';
+  };
+  (function(){
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'https://go.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+            </div>
+          </div>
+          <aside id="article-toc" role="navigation">
+            <div id="article-toc-inner">
+              <strong class="sidebar-title">目录</strong>
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户登录和注销"><span class="toc-text">用户登录和注销</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现登录"><span class="toc-text">实现登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用行为插件的方法"><span class="toc-text">调用行为插件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#记住用户的登录状态"><span class="toc-text">记住用户的登录状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加登录需要的视图"><span class="toc-text">添加登录需要的视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现注销"><span class="toc-text">实现注销</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在用户界面上显示登录状态"><span class="toc-text">在用户界面上显示登录状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户界面组件化"><span class="toc-text">用户界面组件化</span></a></li></ol></li></ol>
+              <a href="#" id="article-toc-top">回到顶部</a>
+            </div>
+          </aside>
+        </div>
+      </article>
+      <aside id="sidebar" role="navigation">
+  <div class="inner"><strong class="sidebar-title">开始使用</strong><a href="index.html" class="sidebar-link">准备开发环境</a><a href="start-create-app.html" class="sidebar-link">创建应用程序</a><a href="start-distructure.html" class="sidebar-link">目录结构</a><a href="start-arch.html" class="sidebar-link">QeePHP架构</a><a href="start-mvc.html" class="sidebar-link">MVC模式</a><a href="start-mvc-start.html" class="sidebar-link">MVC模式启动</a><a href="start-mvc-controller.html" class="sidebar-link">控制器</a><strong class="sidebar-title">开始开发</strong><a href="development-database.html" class="sidebar-link">创建数据库</a><a href="development-yaml.html" class="sidebar-link">YAML 入门</a><a href="development-configs.html" class="sidebar-link">修改配置文件</a><strong class="sidebar-title">使用自动化工具</strong><a href="automation-controller.html" class="sidebar-link">创建控制器</a><a href="automation-model.html" class="sidebar-link">创建模型</a><strong class="sidebar-title">编码前的思考</strong><a href="thinking-oo.html" class="sidebar-link">用对象来思考</a><a href="thinking-analysis.html" class="sidebar-link">需求分析</a><a href="thinking-creating-models.html" class="sidebar-link">创建需要的模型</a><strong class="sidebar-title">实现用户功能</strong><a href="users-register-ui.html" class="sidebar-link">注册（界面）</a><a href="users-register-code.html" class="sidebar-link">注册（功能）</a><a href="users-login.html" class="sidebar-link current">登录和注销</a><a href="users-change-passwd.html" class="sidebar-link">修改密码</a><strong class="sidebar-title">访问控制</strong><a href="acl-why.html" class="sidebar-link">为什么要使用访问控制</a><a href="acl-do.html" class="sidebar-link">实现访问控制</a><strong class="sidebar-title">实现任务管理</strong><a href="tasks-add.html" class="sidebar-link">添加任务</a><a href="tasks-edit.html" class="sidebar-link">修改和删除任务</a><a href="tasks-pagination.html" class="sidebar-link">分页与最后的完善</a><strong class="sidebar-title">美化 URL</strong><a href="routes-router.html" class="sidebar-link">URL 路由是什么</a><a href="routes-configs.html" class="sidebar-link">启用 URL 路由</a><a href="routes-rules.html" class="sidebar-link">添加路由规则</a></div>
+</aside>
+    </div>
+  </div>
+</div>
+
+    <footer id="footer" class="wrapper">
+  <div class="inner">
+    <div id="footer-copyright">
+      &copy; 2017 <a href="" target="_blank">Jack Wu</a><br>
+      
+    </div>
+    <div id="footer-links">
+      <a href="http://weibo.com/" class="footer-link" target="_blank"><i class="fa fa-weibo"></i></a>
+      <a href="https://twitter.com/" class="footer-link" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="https://github.com/jackLucky" class="footer-link" target="_blank"><i class="fa fa-github-alt"></i></a>
+    </div>
+  </div>
+</footer>
+
+  </div>
+  <div id="mobile-nav-dimmer"></div>
+  <nav id="mobile-nav">
+  <div id="mobile-nav-inner">
+    <ul id="mobile-nav-list">
+      <a href="/QeePHPDoc/" class="mobile-nav-link">首页</a><a href="/QeePHPDoc/guide" class="mobile-nav-link">快速指南</a><a href="/QeePHPDoc/doc/" class="mobile-nav-link">文档</a><a href="/QeePHPDoc/news/" class="mobile-nav-link">新闻</a>
+      <li class="mobile-nav-item">
+        <a href="https://github.com/jackLucky" class="mobile-nav-link" rel="external" target="_blank">GitHub</a>
+      </li>
+    </ul>
+    
+      <strong class="mobile-nav-title">开始使用</strong><a href="index.html" class="mobile-nav-link">准备开发环境</a><a href="start-create-app.html" class="mobile-nav-link">创建应用程序</a><a href="start-distructure.html" class="mobile-nav-link">目录结构</a><a href="start-arch.html" class="mobile-nav-link">QeePHP架构</a><a href="start-mvc.html" class="mobile-nav-link">MVC模式</a><a href="start-mvc-start.html" class="mobile-nav-link">MVC模式启动</a><a href="start-mvc-controller.html" class="mobile-nav-link">控制器</a><strong class="mobile-nav-title">开始开发</strong><a href="development-database.html" class="mobile-nav-link">创建数据库</a><a href="development-yaml.html" class="mobile-nav-link">YAML 入门</a><a href="development-configs.html" class="mobile-nav-link">修改配置文件</a><strong class="mobile-nav-title">使用自动化工具</strong><a href="automation-controller.html" class="mobile-nav-link">创建控制器</a><a href="automation-model.html" class="mobile-nav-link">创建模型</a><strong class="mobile-nav-title">编码前的思考</strong><a href="thinking-oo.html" class="mobile-nav-link">用对象来思考</a><a href="thinking-analysis.html" class="mobile-nav-link">需求分析</a><a href="thinking-creating-models.html" class="mobile-nav-link">创建需要的模型</a><strong class="mobile-nav-title">实现用户功能</strong><a href="users-register-ui.html" class="mobile-nav-link">注册（界面）</a><a href="users-register-code.html" class="mobile-nav-link">注册（功能）</a><a href="users-login.html" class="mobile-nav-link current">登录和注销</a><a href="users-change-passwd.html" class="mobile-nav-link">修改密码</a><strong class="mobile-nav-title">访问控制</strong><a href="acl-why.html" class="mobile-nav-link">为什么要使用访问控制</a><a href="acl-do.html" class="mobile-nav-link">实现访问控制</a><strong class="mobile-nav-title">实现任务管理</strong><a href="tasks-add.html" class="mobile-nav-link">添加任务</a><a href="tasks-edit.html" class="mobile-nav-link">修改和删除任务</a><a href="tasks-pagination.html" class="mobile-nav-link">分页与最后的完善</a><strong class="mobile-nav-title">美化 URL</strong><a href="routes-router.html" class="mobile-nav-link">URL 路由是什么</a><a href="routes-configs.html" class="mobile-nav-link">启用 URL 路由</a><a href="routes-rules.html" class="mobile-nav-link">添加路由规则</a>
+    
+  </div>
+  <div id="mobile-lang-select-wrap">
+    <span id="mobile-lang-select-label"><i class="fa fa-globe"></i><span>简体中文</span></span>
+    <select id="mobile-lang-select" data-canonical="">
+      
+        <option value="zh-cn" selected>简体中文</option>
+      
+        <option value="en">English</option>
+      
+    </select>
+  </div>
+</nav>
+  <!-- Scripts -->
+<!-- build:js build/js/main.js -->
+<script src="/QeePHPDoc/js/lang_select.js"></script>
+<script src="/QeePHPDoc/js/scrollingelement.js"></script>
+<script src="/QeePHPDoc/js/toc.js"></script>
+<script src="/QeePHPDoc/js/mobile_nav.js"></script>
+<!-- endbuild -->
+<script src="https://cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js" async></script>
+
+<!-- Algolia -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
+<script type="text/javascript">
+document.getElementById('search-input-wrap').classList.add('on');
+docsearch({
+  appId: 'A7M15R7OJ0',
+  apiKey: '4fe67653ade6c93cd1777e0e3629d15e',
+  indexName: 'QeePHPDoc_zh-cn',
+  inputSelector: '#search-input'
+});
+</script>
+
+
+</body>
+</html>

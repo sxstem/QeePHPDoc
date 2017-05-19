@@ -2,212 +2,212 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/doc/index.html</loc>
-    
-    <lastmod>2017-05-16T08:59:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-controller.html</loc>
-    
-    <lastmod>2017-05-16T07:22:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jacklucky.github.io/QeePHPDoc/index.html</loc>
     
-    <lastmod>2017-05-16T07:14:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/2017/05/16/index/</loc>
-    
-    <lastmod>2017-05-16T04:13:25.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-rules.html</loc>
-    
-    <lastmod>2017-05-15T08:17:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-configs.html</loc>
-    
-    <lastmod>2017-05-15T06:53:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-router.html</loc>
-    
-    <lastmod>2017-05-15T06:44:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-pagination.html</loc>
-    
-    <lastmod>2017-05-15T05:57:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-edit.html</loc>
-    
-    <lastmod>2017-05-15T05:57:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-add.html</loc>
-    
-    <lastmod>2017-05-15T03:20:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-register-code.html</loc>
-    
-    <lastmod>2017-05-14T12:53:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/acl-do.html</loc>
-    
-    <lastmod>2017-05-14T09:44:42.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/acl-why.html</loc>
-    
-    <lastmod>2017-05-14T09:37:49.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-change-passwd.html</loc>
-    
-    <lastmod>2017-05-14T09:24:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-login.html</loc>
-    
-    <lastmod>2017-05-12T03:55:00.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-register-ui.html</loc>
-    
-    <lastmod>2017-05-10T17:34:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-creating-models.html</loc>
-    
-    <lastmod>2017-05-10T16:13:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/index.html</loc>
-    
-    <lastmod>2017-05-10T16:13:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-analysis.html</loc>
-    
-    <lastmod>2017-05-10T14:59:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-oo.html</loc>
-    
-    <lastmod>2017-05-10T08:45:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/automation-model.html</loc>
-    
-    <lastmod>2017-05-10T08:37:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/automation-controller.html</loc>
-    
-    <lastmod>2017-05-10T08:27:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-configs.html</loc>
-    
-    <lastmod>2017-05-10T08:23:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-yaml.html</loc>
-    
-    <lastmod>2017-05-10T07:41:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-database.html</loc>
-    
-    <lastmod>2017-05-10T07:26:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-start.html</loc>
-    
-    <lastmod>2017-05-10T07:03:36.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc.html</loc>
-    
-    <lastmod>2017-05-10T03:49:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-arch.html</loc>
-    
-    <lastmod>2017-05-10T03:49:22.000Z</lastmod>
+    <lastmod>2017-05-19T08:22:26.648Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-create-app.html</loc>
     
-    <lastmod>2017-05-10T03:49:13.000Z</lastmod>
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-register-code.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-login.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-change-passwd.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-oo.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-creating-models.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/thinking-analysis.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-pagination.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-edit.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/tasks-add.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-configs.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-router.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/routes-rules.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-arch.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/users-register-ui.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-distructure.html</loc>
     
-    <lastmod>2017-05-10T03:49:05.000Z</lastmod>
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-controller.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/start-mvc-start.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.644Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/index.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-yaml.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/automation-controller.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-database.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/development-configs.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/automation-model.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/acl-why.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/guide/acl-do.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/doc/index.html</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jacklucky.github.io/QeePHPDoc/2017/05/16/index/</loc>
+    
+    <lastmod>2017-05-19T08:22:26.636Z</lastmod>
     
   </url>
   

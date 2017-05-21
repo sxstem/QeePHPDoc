@@ -343,13 +343,25 @@ body {
 #banner-start-command {
   background: #283542;
   font-family: "Source Code Pro", Monaco, Menlo, Consolas, monospace;
+  max-width: 700px;
+  width: 70%;
+  overflow: hidden;
   display: inline-block;
-  padding: 15px 20px;
+  padding: 15px 5px;
 }
-#banner-start-command:before {
+.start-line {
+  display: inline-block;
+  width: 500px;
+}
+.start-line:before {
   content: "$";
   opacity: 0.5;
   padding-right: 10px;
+}
+@media screen and (min-width: 769px) {
+  .start-line {
+    width: 560px;
+  }
 }
 #banner-start-link {
   color: #fff;
